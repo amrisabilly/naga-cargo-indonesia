@@ -11,7 +11,7 @@
             <a href="{{ route('index') }}"
                 class="flex flex-row items-center duration-700 {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-home-alt {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl hover:text-[#879FFF]"></i>
+                    class="bx bx-home-alt {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
                 <span class="ml-4 text-lg font-bold leading-5">Dashboard</span>
             </a>
         </li>
@@ -20,7 +20,7 @@
             <a href="{{ route('dashboard.data-pengiriman.index') }}"
                 class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-package {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl hover:text-[#879FFF]"></i>
+                    class="bx bx-package {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl "></i>
                 <span class="ml-4 text-lg font-bold leading-5">Data Pengiriman</span>
             </a>
         </li>
@@ -29,7 +29,7 @@
             <a href="{{ route('dashboard.data-pengguna.index') }}"
                 class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pengguna*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-user {{ Request::is('dashboard/data-pengguna*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl hover:text-[#879FFF]"></i>
+                    class="bx bx-user {{ Request::is('dashboard/data-pengguna*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
                 <span class="ml-4 text-lg font-bold leading-5">Data Kurir</span>
             </a>
         </li>

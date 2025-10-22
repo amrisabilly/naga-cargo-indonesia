@@ -18,12 +18,7 @@
         <div class="flex-1 flex flex-col">
             <nav class="flex items-center justify-end  px-10 py-4 bg-white border-b-2 border-[#E6EFF5]">
                 
-                    {{-- Setting --}}
-                    <div class="flex items-center justify-center bg-[#F5F7FA] mr-6 rounded-full h-12 w-12">
-                        <a href="" class="flex items-center justify-center h-8 w-8">
-                            <i class="bx bx-cog text-2xl text-gray-600"></i>
-                        </a>
-                    </div>
+
                     {{-- Notifikasi --}}
                     <div class="flex items-center justify-center bg-[#F5F7FA] mr-6 rounded-full h-12 w-12">
                         <button class="relative flex items-center justify-center h-8 w-8">
