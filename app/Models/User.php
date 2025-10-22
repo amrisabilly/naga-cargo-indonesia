@@ -12,15 +12,21 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'role',
+        'nama',
+        'username',
         'password',
+        'no_hp',
+        'id_daerah',
+        'status',
     ];
 
     /**
@@ -42,4 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function daerah()
+    {
+        return $this->belongsTo(Daerah::class, 'id_daerah', 'id_daerah');
+    }
 }
