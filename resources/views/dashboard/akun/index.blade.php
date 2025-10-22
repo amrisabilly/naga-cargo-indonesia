@@ -299,7 +299,7 @@
 
     {{-- Modal Tambah/Edit Kurir --}}
     <div id="modalKurir" class="modal fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-lg bg-white">
+        <div class="relative top-20 mx-auto p-5 border w-[30em] shadow-lg rounded-lg bg-white">
             <div class="mt-3">
                 {{-- Header Modal --}}
                 <div class="flex items-center justify-between mb-4">
