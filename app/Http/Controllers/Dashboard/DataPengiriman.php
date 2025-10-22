@@ -36,7 +36,11 @@ class DataPengiriman extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Sementara return view dengan dummy data
+        // Nanti bisa diganti dengan data dari database
+        return view('dashboard.data.show', [
+            'id' => $id
+        ]);
     }
 
     /**
