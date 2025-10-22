@@ -6,7 +6,15 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+            fontFamily: {
+                plusJakartaSans: ["Plus Jakarta Sans", "sans-serif"],
+            },
+            colors: {
+                primary: "#3986a3",
+                "blue-transparent": "rgba(16, 102, 129, 0.2)", 
+            },
+        },
   },
   plugins: [],
 }

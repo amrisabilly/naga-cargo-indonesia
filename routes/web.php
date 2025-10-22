@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +11,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//menambahkan Semua route auth
+require __DIR__ . '/auth.php';
+
+// menambahkan Semua route landing
+require __DIR__ . '/landing.php';
+
+// menambahkan Semua route dashboard
+require __DIR__ . '/dashboard.php';
