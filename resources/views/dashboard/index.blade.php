@@ -6,10 +6,11 @@
     <section class="h-full flex flex-col max-h-[95vh] w-full py-5">
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-900">
-                <span class="italic">Dashboard&nbsp;</span>
-                Dropshiper
+                Dashboard <span class="">
+                    Dropshiper
+                </span>
             </h1>
-            <p class="mt-2 text-gray-500">
+            <p class="mt-2 text-gray-500 text-base">
                 Fitur ini digunakan untuk menampilkan statistik data, jumlah barang dan pengguna.
             </p>
         </div>
@@ -18,11 +19,11 @@
         <div class="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <!-- Card Data -->
             <div class="flex h-[150px] flex-col justify-between rounded-xl bg-white p-4 shadow">
-                <span class="text-left text-[20px] font-semibold text-gray-800">
+                <span class="text-left text-[18px] font-semibold text-gray-800">
                     Data Pengiriman
                 </span>
                 <div class="mt-auto flex items-center justify-between">
-                    <span class="text-[36px] font-bold text-[#879FFF]">
+                    <span class="text-[33px] font-bold">
                         125
                     </span>
                     <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
@@ -34,14 +35,14 @@
             <!-- Card User -->
             <div class="flex h-[150px] flex-col justify-between rounded-xl bg-white p-4 shadow">
                 <span class="text-left text-[20px] font-semibold text-gray-800">
-                    Total Pengguna
+                    Total Kurir
                 </span>
                 <div class="mt-auto flex items-center justify-between">
-                    <span class="text-[36px] font-bold text-[#879FFF]">
+                    <span class="text-[33px] font-bold">
                         125
                     </span>
                     <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
-                        <i class='bx bx-package text-3xl text-[#879FFF]'></i>
+                        <i class='bx bx-user text-3xl text-[#879FFF]'></i>
                     </div>
                 </div>
             </div>
@@ -49,14 +50,14 @@
             <!-- Card Produk -->
             <div class="flex h-[150px] flex-col justify-between rounded-xl bg-white p-4 shadow">
                 <span class="text-left text-[20px] font-semibold text-gray-800">
-                    Total Produk
+                    Total <span class="italic">PIC</span> 
                 </span>
                 <div class="mt-auto flex items-center justify-between">
-                    <span class="text-[36px] font-bold text-[#879FFF]">
+                    <span class="text-[33px] font-bold">
                         125
                     </span>
                     <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
-                        <i class='bx bx-package text-3xl text-[#879FFF]'></i>
+                        <i class='bx bx-user-check text-3xl text-[#879FFF]'></i>
                     </div>
                 </div>
             </div>

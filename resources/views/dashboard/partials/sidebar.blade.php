@@ -1,27 +1,32 @@
-{{-- filepath: c:\laragon\www\project-dropshiper\dropshiper\resources\views\dashboard\partials\sidebar.blade.php --}}
-<nav class="flex w-56 flex-col items-center bg-white pt-5 pl-10 pr-6 border-r-2 border-[#E6EFF5]">
+<nav id="sidebar" class="flex w-56 flex-col items-center bg-white pt-5 pl-10 pr-6 border-r-2 border-[#E6EFF5]">
     {{-- LOGO PERUSAHAAN --}}
-    <img src="{{ asset('assets/images/dashboard/logo-cargo.png') }}" alt="">
+    <div class="flex justify-between items-center gap-8">
+        <h1 id="logoText" class="text-3xl font-extrabold italic text-[#122F50]">CARGO</h1>
+        {{-- Hamburger Menu --}}
+        <i id="hamburgerMenu"
+            class="bx bx-menu text-[28px] text-[#122F50] cursor-pointer hover:bg-gray-100 p-1 rounded"></i>
+    </div>
 
     {{-- LIST MENU --}}
     <ul class="mt-10 overflow-y-auto overflow-x-hidden text-gray-700 dark:text-gray-400 space-y-8">
         <!-- Dashboard -->
         <li
-            class="{{ Request::is('/') || Request::is('dashboard') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
+            class="{{ Request::is('/') || Request::is('dashboard') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg px-3 py-2">
             <a href="{{ route('index') }}"
                 class="flex flex-row items-center duration-700 {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
                     class="bx bx-home-alt {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
-                <span class="ml-4 text-lg font-bold leading-5">Dashboard</span>
+                <span class="ml-2 text-base font-bold leading-5 menu-text">Dashboard</span>
             </a>
         </li>
         <!-- Data Pengiriman -->
-        <li class="{{ Request::is('dashboard/data-pengiriman*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
+        <li
+            class="{{ Request::is('dashboard/data-pengiriman*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
             <a href="{{ route('dashboard.data-pengiriman.index') }}"
                 class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-package {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl "></i>
-                <span class="ml-4 text-lg font-bold leading-5">Data Pengiriman</span>
+                    class="bx bx-package {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
+                <span class="ml-2 text-base font-bold leading-5 menu-text">Data Pengiriman</span>
             </a>
         </li>
         <!-- Data Pengguna -->
@@ -30,19 +35,113 @@
                 class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pengguna*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
                     class="bx bx-user {{ Request::is('dashboard/data-pengguna*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
-                <span class="ml-4 text-lg font-bold leading-5">Data Kurir</span>
+                <span class="ml-2 text-base font-bold leading-5 menu-text">Data Kurir</span>
+            </a>
+        </li>
+        <li class="{{ Request::is('dashboard/data-pic*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
+            <a href="{{ route('dashboard.data-pic.index') }}"
+                class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pic*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
+                <i
+                    class="bx bx-user {{ Request::is('dashboard/data-pic*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
+                <span class="ml-2 text-base font-bold leading-5 menu-text">Data <span class="italic">PIC</span></span>
             </a>
         </li>
         <!-- Logout -->
         <li class="dark-hover:text-blue-300 mt-20 rounded-lg p-2">
             <form action="" method="POST">
                 @csrf
-                <button type="submit"
+                <button type="submit" id="logoutBtn"
                     class="fixed bottom-5 left-14 flex items-center gap-2 rounded-full bg-slate-100 px-6 py-2 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-red-300 text-black">
                     <i class="bx bx-log-out text-lg"></i>
-                    <span class="text-center text-base">Keluar</span>
+                    <span class="text-center text-base menu-text">Keluar</span>
                 </button>
             </form>
         </li>
     </ul>
 </nav>
+
+<style>
+    /* Sidebar collapsed state */
+    #sidebar.collapsed {
+        width: 80px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* Hide text when collapsed */
+    #sidebar.collapsed .menu-text,
+    #sidebar.collapsed #logoText {
+        display: none;
+    }
+
+    /* Center items when collapsed */
+    #sidebar.collapsed li {
+        display: flex;
+        justify-content: center;
+    }
+
+    #sidebar.collapsed a {
+        justify-content: center;
+    }
+
+    /* Adjust logout button when collapsed */
+    #sidebar.collapsed #logoutBtn {
+        left: 1.5rem;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    /* Adjust hamburger position when collapsed */
+    #sidebar.collapsed #hamburgerMenu {
+        margin: 0 auto;
+    }
+
+    #sidebar.collapsed .flex.justify-between {
+        justify-content: center;
+    }
+
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mainContent = document.querySelector('.main-content') || document.querySelector('main') ||
+            document.body;
+
+        // Check if sidebar state is saved in localStorage
+        const sidebarState = localStorage.getItem('sidebarCollapsed');
+        const isCollapsed = sidebarState === 'true';
+
+        // Apply initial state
+        if (isCollapsed) {
+            sidebar.classList.add('collapsed');
+            if (mainContent) {
+                mainContent.classList.add('sidebar-collapsed');
+            }
+        }
+
+        // Toggle functionality
+        hamburgerMenu.addEventListener('click', function() {
+            const isCurrentlyCollapsed = sidebar.classList.contains('collapsed');
+
+            if (isCurrentlyCollapsed) {
+                // Expand sidebar
+                sidebar.classList.remove('collapsed');
+                if (mainContent) {
+                    mainContent.classList.remove('sidebar-collapsed');
+                }
+                localStorage.setItem('sidebarCollapsed', 'false');
+            } else {
+                // Collapse sidebar
+                sidebar.classList.add('collapsed');
+                if (mainContent) {
+                    mainContent.classList.add('sidebar-collapsed');
+                }
+                localStorage.setItem('sidebarCollapsed', 'true');
+            }
+        });
+    });
+</script>

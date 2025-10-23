@@ -15,25 +15,29 @@
         .dataTables_wrapper .dataTables_info,
         .dataTables_wrapper .dataTables_paginate {
             margin: 1rem 0;
+            font-size: 1rem;
         }
 
         .dataTables_wrapper .dataTables_filter input {
-            padding: 0.5rem;
+            padding: 0.75rem;
             border: 1px solid #d1d5db;
             border-radius: 0.375rem;
             margin-left: 0.5rem;
             width: 200px;
+            font-size: 1rem;
         }
 
         .dataTables_wrapper .dataTables_length select {
-            padding: 0.25rem;
+            padding: 0.5rem;
             border: 1px solid #d1d5db;
             border-radius: 0.375rem;
+            font-size: 1rem;
         }
 
         table.dataTable {
             width: 100% !important;
             table-layout: fixed;
+            font-size: 1rem;
         }
 
         table.dataTable thead th {
@@ -41,6 +45,8 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-size: 0.875rem;
+            padding: 1rem 0.75rem;
         }
 
         table.dataTable tbody td {
@@ -49,14 +55,16 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-size: 1rem;
         }
 
         .dataTables_wrapper .dataTables_paginate .paginate_button {
-            padding: 0.5rem 0.75rem;
+            padding: 0.75rem 1rem;
             margin: 0 0.125rem;
             border-radius: 0.375rem;
             border: 1px solid #d1d5db;
             background: white;
+            font-size: 1rem;
         }
 
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
@@ -101,7 +109,7 @@
 
         .credential-text {
             font-family: 'Courier New', monospace;
-            font-size: 13px;
+            font-size: 1rem;
             color: #1e293b;
         }
     </style>
@@ -112,8 +120,8 @@
         {{-- Header dan Button Actions --}}
         <div class="mb-6 flex justify-between items-start flex-shrink-0">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">Data Akun Kurir</h1>
-                <p class="mt-1 text-sm text-gray-500">Kelola akun username dan password kurir</p>
+                <h1 class="text-3xl font-bold text-gray-900">Data Akun Kurir</h1>
+                <p class="mt-1 text-base text-gray-500">Kelola akun username dan password kurir</p>
             </div>
             <div class="flex gap-3">
                 {{-- Tambah Kurir Button --}}
@@ -133,40 +141,40 @@
                         <thead>
                             <tr class="bg-gray-50">
                                 <th
-                                    class="px-3 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-8">
+                                    class="px-3 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider w-8">
                                     No
                                 </th>
                                 <th
-                                    class="px-3 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    class="px-3 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
                                     Nama Lengkap</th>
                                 <th
-                                    class="px-3 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    class="px-3 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
                                     Username</th>
                                 <th
-                                    class="px-3 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    class="px-3 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
                                     Password</th>
                                 <th
-                                    class="px-3 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    class="px-3 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
                                     No. Telepon</th>
                                 <th
-                                    class="px-3 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    class="px-3 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
                                     Status</th>
                                 <th
-                                    class="px-3 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-20">
+                                    class="px-3 py-4 text-center text-sm font-semibold text-gray-600 uppercase tracking-wider w-20">
                                     Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100">
                             {{-- Data Dummy --}}
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-3 py-4 text-sm text-gray-900 font-medium">1</td>
-                                <td class="px-3 py-4 text-sm text-gray-900" title="Ahmad Kurniawan">Ahmad Kurniawan</td>
+                                <td class="px-3 py-4 text-base text-gray-900 font-medium">1</td>
+                                <td class="px-3 py-4 text-base text-gray-900" title="Ahmad Kurniawan">Ahmad Kurniawan</td>
                                 <td class="px-3 py-4">
                                     <div class="credential-item">
                                         <span class="credential-text text-[#879FFF] font-semibold">ahmad_kurir</span>
                                         <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
                                             onclick="copyToClipboard('ahmad_kurir', this)" title="Salin Username">
-                                            <i class="bx bx-copy text-sm"></i>
+                                            <i class="bx bx-copy text-base"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -175,42 +183,42 @@
                                         <span class="credential-text">kurniawan123</span>
                                         <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
                                             onclick="copyToClipboard('kurniawan123', this)" title="Salin Password">
-                                            <i class="bx bx-copy text-sm"></i>
+                                            <i class="bx bx-copy text-base"></i>
                                         </button>
                                     </div>
                                 </td>
-                                <td class="px-3 py-4 text-sm text-gray-900">08123456789</td>
+                                <td class="px-3 py-4 text-base text-gray-900">08123456789</td>
                                 <td class="px-3 py-4">
                                     <span
-                                        class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1"></div>
+                                        class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-green-100 text-green-800">
+                                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
                                         Aktif
                                     </span>
                                 </td>
                                 <td class="px-3 py-4 text-center">
-                                    <div class="flex justify-center gap-1">
+                                    <div class="flex justify-center gap-2">
                                         <button
-                                            class="edit-kurir p-1.5 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
+                                            class="edit-kurir p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
                                             title="Edit" data-id="1">
-                                            <i class="bx bx-edit text-lg"></i>
+                                            <i class="bx bx-edit text-xl"></i>
                                         </button>
                                         <button
-                                            class="hapus-kurir p-1.5 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
+                                            class="hapus-kurir p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
                                             title="Hapus" data-id="1">
-                                            <i class="bx bx-trash text-lg"></i>
+                                            <i class="bx bx-trash text-xl"></i>
                                         </button>
                                     </div>
                                 </td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-3 py-4 text-sm text-gray-900 font-medium">2</td>
-                                <td class="px-3 py-4 text-sm text-gray-900" title="Budi Santoso">Budi Santoso</td>
+                                <td class="px-3 py-4 text-base text-gray-900 font-medium">2</td>
+                                <td class="px-3 py-4 text-base text-gray-900" title="Budi Santoso">Budi Santoso</td>
                                 <td class="px-3 py-4">
                                     <div class="credential-item">
                                         <span class="credential-text text-[#879FFF] font-semibold">budi_kurir</span>
                                         <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
                                             onclick="copyToClipboard('budi_kurir', this)" title="Salin Username">
-                                            <i class="bx bx-copy text-sm"></i>
+                                            <i class="bx bx-copy text-base"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -219,42 +227,42 @@
                                         <span class="credential-text">santoso456</span>
                                         <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
                                             onclick="copyToClipboard('santoso456', this)" title="Salin Password">
-                                            <i class="bx bx-copy text-sm"></i>
+                                            <i class="bx bx-copy text-base"></i>
                                         </button>
                                     </div>
                                 </td>
-                                <td class="px-3 py-4 text-sm text-gray-900">08234567890</td>
+                                <td class="px-3 py-4 text-base text-gray-900">08234567890</td>
                                 <td class="px-3 py-4">
                                     <span
-                                        class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
-                                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full mr-1"></div>
+                                        class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-gray-100 text-gray-800">
+                                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full mr-2"></div>
                                         Nonaktif
                                     </span>
                                 </td>
                                 <td class="px-3 py-4 text-center">
-                                    <div class="flex justify-center gap-1">
+                                    <div class="flex justify-center gap-2">
                                         <button
-                                            class="edit-kurir p-1.5 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
+                                            class="edit-kurir p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
                                             title="Edit" data-id="2">
-                                            <i class="bx bx-edit text-lg"></i>
+                                            <i class="bx bx-edit text-xl"></i>
                                         </button>
                                         <button
-                                            class="hapus-kurir p-1.5 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
+                                            class="hapus-kurir p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
                                             title="Hapus" data-id="2">
-                                            <i class="bx bx-trash text-lg"></i>
+                                            <i class="bx bx-trash text-xl"></i>
                                         </button>
                                     </div>
                                 </td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-3 py-4 text-sm text-gray-900 font-medium">3</td>
-                                <td class="px-3 py-4 text-sm text-gray-900" title="Sari Melati">Sari Melati</td>
+                                <td class="px-3 py-4 text-base text-gray-900 font-medium">3</td>
+                                <td class="px-3 py-4 text-base text-gray-900" title="Sari Melati">Sari Melati</td>
                                 <td class="px-3 py-4">
                                     <div class="credential-item">
                                         <span class="credential-text text-[#879FFF] font-semibold">sari_kurir</span>
                                         <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
                                             onclick="copyToClipboard('sari_kurir', this)" title="Salin Username">
-                                            <i class="bx bx-copy text-sm"></i>
+                                            <i class="bx bx-copy text-base"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -263,29 +271,29 @@
                                         <span class="credential-text">melati789</span>
                                         <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
                                             onclick="copyToClipboard('melati789', this)" title="Salin Password">
-                                            <i class="bx bx-copy text-sm"></i>
+                                            <i class="bx bx-copy text-base"></i>
                                         </button>
                                     </div>
                                 </td>
-                                <td class="px-3 py-4 text-sm text-gray-900">08345678901</td>
+                                <td class="px-3 py-4 text-base text-gray-900">08345678901</td>
                                 <td class="px-3 py-4">
                                     <span
-                                        class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1"></div>
+                                        class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-green-100 text-green-800">
+                                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
                                         Aktif
                                     </span>
                                 </td>
                                 <td class="px-3 py-4 text-center">
-                                    <div class="flex justify-center gap-1">
+                                    <div class="flex justify-center gap-2">
                                         <button
-                                            class="edit-kurir p-1.5 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
+                                            class="edit-kurir p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
                                             title="Edit" data-id="3">
-                                            <i class="bx bx-edit text-lg"></i>
+                                            <i class="bx bx-edit text-xl"></i>
                                         </button>
                                         <button
-                                            class="hapus-kurir p-1.5 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
+                                            class="hapus-kurir p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
                                             title="Hapus" data-id="3">
-                                            <i class="bx bx-trash text-lg"></i>
+                                            <i class="bx bx-trash text-xl"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -406,7 +414,7 @@
                 ],
                 language: {
                     search: "Cari:",
-                    lengthMenu: "Tampilkan _MENU_ data",
+                    lengthMenu: "Tampilkan _MENU_",
                     info: "Menampilkan _START_ hingga _END_ dari _TOTAL_ data",
                     infoEmpty: "Menampilkan 0 hingga 0 dari 0 data",
                     infoFiltered: "(disaring dari _MAX_ total data)",

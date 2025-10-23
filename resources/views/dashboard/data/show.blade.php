@@ -279,15 +279,8 @@
                 </a>
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">Detail Pengiriman</h1>
-                    <p class="mt-1 text-sm text-gray-500">Informasi lengkap pengiriman PKG001</p>
+                    <p class="mt-1 text-base text-gray-500">Informasi lengkap pengiriman <span class="font-bold">PKG0010201930</span></p>
                 </div>
-            </div>
-            <div class="flex gap-3 mr-7">
-                <button
-                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors shadow-sm text-sm">
-                    <i class="bx bx-printer text-lg"></i>
-                    Print
-                </button>
             </div>
         </div>
 
@@ -295,45 +288,6 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1">
             {{-- Left Column - Info Details --}}
             <div class="lg:col-span-1 space-y-6">
-                {{-- Status Card --}}
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Status Pengiriman</h3>
-                    <div class="status-badge status-terkirim">
-                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                        Terkirim
-                    </div>
-                    <div class="mt-4 text-sm text-gray-600">
-                        <i class="bx bx-time-five mr-2"></i>
-                        Diperbarui: 15 Jan 2024, 14:30 WIB
-                    </div>
-                </div>
-
-                {{-- Package Info --}}
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Informasi Paket</h3>
-                    <div class="info-card">
-                        <div class="info-row">
-                            <span class="info-label">Kode Pengiriman</span>
-                            <span class="info-value text-[#879FFF]">PKG001</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Tanggal Kirim</span>
-                            <span class="info-value">15 Jan 2024</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Berat</span>
-                            <span class="info-value">2.5 kg</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Jenis Layanan</span>
-                            <span class="info-value">Express</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Estimasi</span>
-                            <span class="info-value">1-2 Hari</span>
-                        </div>
-                    </div>
-                </div>
 
                 {{-- Sender & Receiver Info --}}
                 <div class="bg-white rounded-xl shadow-lg p-6">
