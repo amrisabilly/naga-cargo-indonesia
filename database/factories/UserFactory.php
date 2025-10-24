@@ -26,8 +26,8 @@ class UserFactory extends Factory
         return [
             'role' => $this->faker->randomElement(['Kurir', 'PIC']),
             'nama' => $this->faker->text(100),
-            'username' => $this->faker->unique()->regexify('[a-zA-Z0-9._]{1,50}'),
-            'password' => bcrypt('password'),
+            'username' => $this->faker->unique()->firstName(),
+            'password' => $this->faker->firstName(),
             'no_hp' => $this->faker->regexify('\+?[0-9]{1,15}'),
             'id_daerah' => null,
             'status' => $this->faker->randomElement(['Aktif', 'Nonaktif']),

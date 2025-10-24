@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->string('AWB', 30)->primary();
-            $table->foreignId('id_user')->nullable()->constrained('user', 'id_user')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('id_user')->nullable()->constrained('users', 'id_user')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('id_daerah')->nullable()->constrained('daerah', 'id_daerah')->cascadeOnUpdate()->nullOnDelete();
             $table->string('tujuan', 70)->nullable();
             $table->string('penerima', 50)->nullable();

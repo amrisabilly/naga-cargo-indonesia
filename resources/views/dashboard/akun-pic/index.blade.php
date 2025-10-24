@@ -298,6 +298,100 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-3 py-4 text-base text-gray-900 font-medium">2</td>
+                                <td class="px-3 py-4 text-base text-gray-900" title="Budi Santoso">Budi Santoso</td>
+                                <td class="px-3 py-4">
+                                    <div class="credential-item">
+                                        <span class="credential-text text-[#879FFF] font-semibold">budi_pic</span>
+                                        <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
+                                            onclick="copyToClipboard('budi_pic', this)" title="Salin Username">
+                                            <i class="bx bx-copy text-base"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="credential-item">
+                                        <span class="credential-text">santoso456</span>
+                                        <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
+                                            onclick="copyToClipboard('santoso456', this)" title="Salin Password">
+                                            <i class="bx bx-copy text-base"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-900">08234567890</td>
+                                <td class="px-3 py-4">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-gray-100 text-gray-800">
+                                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full mr-2"></div>
+                                        Nonaktif
+                                    </span>
+                                </td>
+                                <td class="px-3 py-4 text-center">
+                                    <div class="flex justify-center gap-2">
+                                        <button
+                                            class="edit-kurir p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
+                                            title="Edit" data-id="2">
+                                            <i class="bx bx-edit text-xl"></i>
+                                        </button>
+                                        <button
+                                            class="hapus-kurir p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
+                                            title="Hapus" data-id="2">
+                                            <i class="bx bx-trash text-xl"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-3 py-4 text-base text-gray-900 font-medium">2</td>
+                                <td class="px-3 py-4 text-base text-gray-900" title="Budi Santoso">Budi Santoso</td>
+                                <td class="px-3 py-4">
+                                    <div class="credential-item">
+                                        <span class="credential-text text-[#879FFF] font-semibold">budi_pic</span>
+                                        <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
+                                            onclick="copyToClipboard('budi_pic', this)" title="Salin Username">
+                                            <i class="bx bx-copy text-base"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="credential-item">
+                                        <span class="credential-text">santoso456</span>
+                                        <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
+                                            onclick="copyToClipboard('santoso456', this)" title="Salin Password">
+                                            <i class="bx bx-copy text-base"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4 text-base text-gray-900">08234567890</td>
+                                <td class="px-3 py-4">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-gray-100 text-gray-800">
+                                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full mr-2"></div>
+                                        Nonaktif
+                                    </span>
+                                </td>
+                                <td class="px-3 py-4 text-center">
+                                    <div class="flex justify-center gap-2">
+                                        <button
+                                            class="edit-kurir p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
+                                            title="Edit" data-id="2">
+                                            <i class="bx bx-edit text-xl"></i>
+                                        </button>
+                                        <button
+                                            class="hapus-kurir p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors"
+                                            title="Hapus" data-id="2">
+                                            <i class="bx bx-trash text-xl"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+
+                            
+
+                            
+
                         </tbody>
                     </table>
                 </div>
