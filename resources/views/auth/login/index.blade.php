@@ -16,7 +16,7 @@
             </div>
 
             {{-- Login Form --}}
-            <form id="loginForm" action="" method="POST" class="space-y-6">
+            <form id="loginForm" action="{{ route('auth.authenticate') }}" method="POST" class="space-y-6">
                 @csrf
 
                 {{-- Username Field --}}

@@ -24,7 +24,7 @@
                 </span>
                 <div class="mt-auto flex items-center justify-between">
                     <span class="text-[33px] font-bold">
-                        125
+                        {{ $totalPengiriman }}
                     </span>
                     <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
                         <i class='bx bx-package text-3xl text-[#879FFF]'></i>
@@ -39,7 +39,7 @@
                 </span>
                 <div class="mt-auto flex items-center justify-between">
                     <span class="text-[33px] font-bold">
-                        125
+                        {{ $totalKurir }}
                     </span>
                     <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
                         <i class='bx bx-user text-3xl text-[#879FFF]'></i>
@@ -54,7 +54,7 @@
                 </span>
                 <div class="mt-auto flex items-center justify-between">
                     <span class="text-[33px] font-bold">
-                        125
+                        {{ $totalPIC }}
                     </span>
                     <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
                         <i class='bx bx-user-check text-3xl text-[#879FFF]'></i>
@@ -70,8 +70,9 @@
                 <h3 class="text-lg font-semibold text-gray-800">Statistik Pengiriman Bulanan</h3>
                 <select id="yearSelector"
                     class="rounded-lg border text-xs focus:outline-none focus:ring focus:ring-blue-300">
-                    <option value="2024" selected>2024</option>
-                    <option value="2023">2023</option>
+                    <option value="2026" >2026</option>
+                    <option value="2025" selected>2025</option>
+                    <option value="2024" >2024</option>
                 </select>
             </div>
 
@@ -80,6 +81,10 @@
                 <canvas id="myChart"></canvas>
             </div>
         </div>
+
+        {{-- <pre>
+            {{ json_encode($statistikPengiriman, JSON_PRETTY_PRINT) }}
+        </pre> --}}
     </section>
 @endsection
 
@@ -87,108 +92,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data dummy untuk chart
-        const chartData = {
-            "2024": {
-                "Januari": {
-                    "Pengiriman": 45,
-                    "Produk": 20
-                },
-                "Februari": {
-                    "Pengiriman": 52,
-                    "Produk": 25
-                },
-                "Maret": {
-                    "Pengiriman": 38,
-                    "Produk": 18
-                },
-                "April": {
-                    "Pengiriman": 61,
-                    "Produk": 30
-                },
-                "Mei": {
-                    "Pengiriman": 55,
-                    "Produk": 28
-                },
-                "Juni": {
-                    "Pengiriman": 67,
-                    "Produk": 35
-                },
-                "Juli": {
-                    "Pengiriman": 73,
-                    "Produk": 40
-                },
-                "Agustus": {
-                    "Pengiriman": 69,
-                    "Produk": 38
-                },
-                "September": {
-                    "Pengiriman": 58,
-                    "Produk": 32
-                },
-                "Oktober": {
-                    "Pengiriman": 64,
-                    "Produk": 36
-                },
-                "November": {
-                    "Pengiriman": 71,
-                    "Produk": 42
-                },
-                "Desember": {
-                    "Pengiriman": 78,
-                    "Produk": 45
-                }
-            },
-            "2023": {
-                "Januari": {
-                    "Pengiriman": 35,
-                    "Produk": 15
-                },
-                "Februari": {
-                    "Pengiriman": 42,
-                    "Produk": 20
-                },
-                "Maret": {
-                    "Pengiriman": 28,
-                    "Produk": 12
-                },
-                "April": {
-                    "Pengiriman": 51,
-                    "Produk": 25
-                },
-                "Mei": {
-                    "Pengiriman": 45,
-                    "Produk": 22
-                },
-                "Juni": {
-                    "Pengiriman": 57,
-                    "Produk": 30
-                },
-                "Juli": {
-                    "Pengiriman": 63,
-                    "Produk": 35
-                },
-                "Agustus": {
-                    "Pengiriman": 59,
-                    "Produk": 32
-                },
-                "September": {
-                    "Pengiriman": 48,
-                    "Produk": 28
-                },
-                "Oktober": {
-                    "Pengiriman": 54,
-                    "Produk": 31
-                },
-                "November": {
-                    "Pengiriman": 61,
-                    "Produk": 37
-                },
-                "Desember": {
-                    "Pengiriman": 68,
-                    "Produk": 40
-                }
-            }
-        };
+        const chartData = @json($statistikPengiriman);
 
         const allCategories = ["Pengiriman", "Produk"];
 

@@ -25,7 +25,7 @@ class OrderFactory extends Factory
             'tujuan' => $this->faker->text(70),
             'penerima' => $this->faker->text(50),
             'no_hp' => $this->faker->regexify('\+?[0-9]{1,15}'),
-            'tanggal' => $this->faker->date,
+            'tanggal' => $this->faker->dateTimeBetween('2025-1-31', '2027-1-31')->format('Y-m-d'),
             'status' => $this->faker->randomElement(['Proses', 'Gagal', 'Terkirim']),
         ];
     }
