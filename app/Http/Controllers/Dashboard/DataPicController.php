@@ -20,7 +20,7 @@ class DataPicController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.akun-pic.create');
     }
 
     /**

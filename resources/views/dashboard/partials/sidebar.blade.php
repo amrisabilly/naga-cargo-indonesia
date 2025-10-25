@@ -1,7 +1,10 @@
-<nav id="sidebar" class="flex w-56 flex-col items-center bg-white pt-5 pl-10 pr-6 border-r-2 border-[#E6EFF5]">
+{{-- filepath: c:\laragon\www\project-dropshiper\dropshiper\resources\views\dashboard\partials\sidebar.blade.php --}}
+<nav id="sidebar"
+    class="flex-shrink-0 w-56 flex flex-col items-center bg-white pt-5 pl-10 pr-6 border-r-2 border-[#E6EFF5]">
     {{-- LOGO PERUSAHAAN --}}
     <div class="flex justify-between items-center gap-8">
-        <h1 id="logoText" class="text-3xl font-extrabold italic text-[#122F50]">CARGO</h1>
+        <h1 id="logoText" class="text-3xl font-extrabold"><span class="bg-[#122F50] text-white px-2">CAR</span><span
+                class="italic text-[#122F50]">GO</span></h1>
         {{-- Hamburger Menu --}}
         <i id="hamburgerMenu"
             class="bx bx-menu text-[28px] text-[#122F50] cursor-pointer hover:bg-gray-100 p-1 rounded"></i>
@@ -13,36 +16,36 @@
         <li
             class="{{ Request::is('/') || Request::is('dashboard') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg px-3 py-2">
             <a href="{{ route('index') }}"
-                class="flex flex-row items-center duration-700 {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
+                class="group flex flex-row items-center duration-700 {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-home-alt {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
+                    class="bx bx-home-alt {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700 group-hover:text-[#879FFF]' }} text-xl transition-colors duration-300"></i>
                 <span class="ml-2 text-base font-bold leading-5 menu-text">Dashboard</span>
             </a>
         </li>
         <!-- Data Pengiriman -->
-        <li
-            class="{{ Request::is('dashboard/data-pengiriman*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
-            <a href="{{ route('dashboard.data-pengiriman.index') }}"
-                class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
+        <li class="{{ Request::is('dashboard/daerah*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
+            <a href="{{ route('dashboard.daerah') }}"
+                class="group flex flex-row items-center duration-700 {{ Request::is('dashboard/daerah*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-package {{ Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
+                    class="bx bx-package {{ Request::is('dashboard/daerah*') ? 'text-white' : 'text-gray-700 group-hover:text-[#879FFF]' }} text-xl transition-colors duration-300"></i>
                 <span class="ml-2 text-base font-bold leading-5 menu-text">Data Pengiriman</span>
             </a>
         </li>
-        <!-- Data Pengguna -->
-        <li class="{{ Request::is('dashboard/data-pengguna*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
-            <a href="{{ route('dashboard.data-pengguna.index') }}"
-                class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pengguna*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
+        <!-- Data Kurir -->
+        <li class="{{ Request::is('dashboard/data-kurir*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
+            <a href="{{ route('dashboard.data-kurir.index') }}"
+                class="group flex flex-row items-center duration-700 {{ Request::is('dashboard/data-kurir*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-user {{ Request::is('dashboard/data-pengguna*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
+                    class="bx bx-user {{ Request::is('dashboard/data-kurir*') ? 'text-white' : 'text-gray-700 group-hover:text-[#879FFF]' }} text-xl transition-colors duration-300"></i>
                 <span class="ml-2 text-base font-bold leading-5 menu-text">Data Kurir</span>
             </a>
         </li>
+        <!-- Data PIC -->
         <li class="{{ Request::is('dashboard/data-pic*') ? 'bg-[#879FFF] rounded-xl' : '' }} mt-1 rounded-lg p-2">
             <a href="{{ route('dashboard.data-pic.index') }}"
-                class="flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pic*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
+                class="group flex flex-row items-center duration-700 {{ Request::is('dashboard/data-pic*') ? 'text-white' : 'text-gray-700 hover:text-[#879FFF]' }}">
                 <i
-                    class="bx bx-user {{ Request::is('dashboard/data-pic*') ? 'text-white' : 'text-gray-700' }} mr-2 text-xl"></i>
+                    class="bx bx-user-check {{ Request::is('dashboard/data-pic*') ? 'text-white' : 'text-gray-700 group-hover:text-[#879FFF]' }} text-xl transition-colors duration-300"></i>
                 <span class="ml-2 text-base font-bold leading-5 menu-text">Data <span class="italic">PIC</span></span>
             </a>
         </li>
@@ -51,9 +54,10 @@
             <form action="" method="POST">
                 @csrf
                 <button type="submit" id="logoutBtn"
-                    class="fixed bottom-5 left-14 flex items-center gap-2 rounded-full bg-slate-100 px-6 py-2 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-red-300 text-black">
-                    <i class="bx bx-log-out text-lg"></i>
-                    <span class="text-center text-base menu-text">Keluar</span>
+                    class="group fixed bottom-5 left-14 flex items-center gap-2 rounded-full bg-slate-100 px-6 py-2 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-red-300 text-black transition-all duration-300">
+                    <i class="bx bx-log-out text-lg group-hover:text-red-500 transition-colors duration-300"></i>
+                    <span
+                        class="text-center text-base menu-text group-hover:text-red-500 transition-colors duration-300">Keluar</span>
                 </button>
             </form>
         </li>
@@ -102,6 +106,12 @@
         justify-content: center;
     }
 
+    
+
+    /* Hide text in collapsed logout button */
+    #sidebar.collapsed #logoutBtn span {
+        display: none;
+    }
 </style>
 
 <script>

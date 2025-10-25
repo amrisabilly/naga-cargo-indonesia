@@ -15,7 +15,13 @@ class DataKurirController extends Controller
     public function index()
     {
         $kurirs = User::where('role', 'Kurir')->get();
-        return view('dashboard.akun.index', compact('kurirs'));
+        return view('dashboard.kurir.index', compact('kurirs'));
+    }
+
+
+    public function create()
+    {
+        return view('dashboard.kurir.create');
     }
 
     /**
@@ -43,7 +49,7 @@ class DataKurirController extends Controller
                 'status' => $request->status,
             ]);
 
-            return redirect()->route('dashboard.akun.index')->with('success', 'Kurir berhasil ditambahkan.');
+            return redirect()->route('dashboard.kurir.index')->with('success', 'Kurir berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menambahkan kurir: ' . $e->getMessage()]);
         }
@@ -75,7 +81,7 @@ class DataKurirController extends Controller
                 'status' => $request->status,
             ]);
 
-            return redirect()->route('dashboard.akun.index')->with('success', 'Kurir berhasil diperbarui.');
+            return redirect()->route('dashboard.kurir.index')->with('success', 'Kurir berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui kurir: ' . $e->getMessage()]);
         }

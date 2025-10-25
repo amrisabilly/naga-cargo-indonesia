@@ -3,7 +3,7 @@
 ])
 
 @section('content')
-    <section class="h-full flex flex-col max-h-[95vh] w-full py-5">
+    <section class="h-full flex flex-col max-h-[95vh] w-full py-5 pt-10">
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-900">
                 Dashboard <span class="">

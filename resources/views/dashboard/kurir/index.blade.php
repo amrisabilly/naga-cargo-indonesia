@@ -60,7 +60,7 @@
             <div class="w-full ">
                 <div class="mb-6 flex justify-between items-start flex-shrink-0">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Data Akun PIC</h1>
+                        <h1 class="text-3xl font-bold text-gray-900">Data Akun Kurir</h1>
                         <p class="mt-1 text-base text-gray-500">Kelola akun username dan password kurir</p>
                     </div>
                     <div class="flex gap-3">
@@ -68,7 +68,7 @@
                         <button
                             class="bg-[#879FFF] hover:bg-[#6B7EF7] text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors shadow-sm text-sm">
                             <i class="bx bx-plus text-lg"></i>
-                            Tambah pic
+                            Tambah Kurir
                         </button>
                     </div>
                 </div>

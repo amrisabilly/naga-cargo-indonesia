@@ -1,4 +1,3 @@
-{{-- filepath: c:\laragon\www\project-dropshiper\dropshiper\resources\views\dashboard\data\show.blade.php --}}
 @extends('dashboard.layout.app', [
     'title' => 'Detail Pengiriman',
 ])

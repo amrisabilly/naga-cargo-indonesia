@@ -15,6 +15,11 @@ class DataPengiriman extends Controller
         return view('dashboard.data.index');
     }
 
+    public function daerah()
+    {
+        return view('dashboard.data.daerah');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
