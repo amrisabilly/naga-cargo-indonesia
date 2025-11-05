@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Daerah;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,14 +15,16 @@ class DataKurirController extends Controller
      */
     public function index()
     {
-        $kurirs = User::where('role', 'Kurir')->get();
+        $kurirs = User::with('daerah')->get();
         return view('dashboard.kurir.index', compact('kurirs'));
     }
 
 
     public function create()
     {
-        return view('dashboard.kurir.create');
+        // fetch data daerah
+        $daerah = Daerah::get();
+        return view('dashboard.kurir.create', compact('daerah'));
     }
 
     /**
@@ -49,39 +52,55 @@ class DataKurirController extends Controller
                 'status' => $request->status,
             ]);
 
-            return redirect()->route('dashboard.kurir.index')->with('success', 'Kurir berhasil ditambahkan.');
+            return redirect()->route('dashboard.data-kurir.index')->with('success', 'Kurir berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menambahkan kurir: ' . $e->getMessage()]);
         }
     }
 
+    public function edit($id_user)
+    {
+        // fetch data kurir dan daerah
+        $kurir = User::where('id_user', $id_user)->first();
+        $daerah = Daerah::get();
+        return view('dashboard.kurir.edit', compact('kurir', 'daerah'));
+    }
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_user)
     {
-        $kurir = User::findOrFail($id);
+        // dd($request, $id_user);
+
+        $kurir = User::where('id_user', $id_user)->first();
 
         $request->validate([
             'nama' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $kurir->id,
-            'password' => 'nullable|string|min:6',
+            'username' => 'required|string|max:255',
+            'password' => 'nullable|string|min:6', // nullable!
             'no_hp' => 'required|string|max:15',
             'id_daerah' => 'nullable|integer',
             'status' => 'required|in:Aktif,Nonaktif',
         ]);
 
         try {
-            $kurir->update([
+            $data = [
                 'nama' => $request->nama,
                 'username' => $request->username,
-                'password' => $request->password ,
                 'no_hp' => $request->no_hp,
                 'id_daerah' => $request->id_daerah,
                 'status' => $request->status,
-            ]);
+            ];
 
-            return redirect()->route('dashboard.kurir.index')->with('success', 'Kurir berhasil diperbarui.');
+            // Update password hanya jika diisi
+            if ($request->filled('password')) {
+                $data['password'] = $request->password;
+            }
+
+            $kurir->update($data);
+
+            return redirect()->route('dashboard.data-kurir.index')->with('success', 'Kurir berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui kurir: ' . $e->getMessage()]);
         }
@@ -90,11 +109,11 @@ class DataKurirController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id_user)
     {
-        $kurir = User::findOrFail($id);
+        $kurir = User::where('id_user', $id_user)->firstOrFail();
         $kurir->delete();
 
-        //return redirect()->route('dashboard.akun.index')->with('success', 'Kurir berhasil dihapus.');
+        return redirect()->route('dashboard.data-kurir.index')->with('success', 'Kurir berhasil dihapus.');
     }
 }

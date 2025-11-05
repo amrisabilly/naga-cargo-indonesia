@@ -4,6 +4,7 @@
 
 @section('style')
 @endsection
+{{-- @dd($kurir); --}}
 
 @section('content')
     <section class="flex w-full pt-10">
@@ -16,16 +17,16 @@
                     </div>
                 </div>
                 <div class="bg-white py-6 px-8 rounded-lg shadow-sm">
-                    <form id="formKurir" action="" method="POST">
+                    <form id="formKurir" action="{{ route('dashboard.data-kurir.update', $kurir->id_user) }}" method="POST">
                         @csrf
-                        @method('PUT')
+                        @method('PATCH')
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Nama Lengkap -->
                             <div class="md:col-span-2">
                                 <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">
                                     Nama Lengkap <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nama" name="nama" required value="Ahmad Kurniawan"
+                                <input type="text" id="nama" name="nama" required value="{{ $kurir->nama }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan nama lengkap">
                                 @error('nama')
@@ -38,7 +39,7 @@
                                 <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
                                     Username <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="username" name="username" required value="ahmad_kurir"
+                                <input type="text" id="username" name="username" required value="{{ $kurir->username }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan username">
                                 @error('username')
@@ -70,7 +71,7 @@
                                 <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">
                                     No. Telepon <span class="text-red-500">*</span>
                                 </label>
-                                <input type="tel" id="no_hp" name="no_hp" required value="08123456789"
+                                <input type="tel" id="no_hp" name="no_hp" required value="{{ $kurir->no_hp }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan nomor telepon">
                                 @error('no_hp')
@@ -83,10 +84,10 @@
                                 <label for="daerah_search" class="block text-sm font-medium text-gray-700 mb-2">
                                     Daerah <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="daerah_search" autocomplete="off" required value="Jakarta Pusat"
+                                <input type="text" id="daerah_search" autocomplete="off" required value="{{ $kurir->daerah->nama ?? '' }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Cari dan pilih daerah...">
-                                <input type="hidden" id="id_daerah" name="id_daerah" required value="1">
+                                <input type="hidden" id="id_daerah" name="id_daerah" required value="{{ $kurir->id_daerah }}">
 
                                 <!-- Dropdown daerah -->
                                 <div id="daerah_dropdown"
@@ -107,12 +108,12 @@
                                 </label>
                                 <div class="flex gap-6">
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="status" value="aktif" checked
+                                        <input type="radio" name="status" value="Aktif" {{ $kurir->status == 'Aktif' ? 'checked' : '' }}
                                             class="form-radio h-5 w-5 text-[#879FFF] focus:ring-[#879FFF] border-gray-300">
                                         <span class="ml-2 text-base text-gray-700">Aktif</span>
                                     </label>
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="status" value="nonaktif"
+                                        <input type="radio" name="status" value="Nonaktif" {{ $kurir->status == 'Nonaktif' ? 'checked' : '' }}
                                             class="form-radio h-5 w-5 text-[#879FFF] focus:ring-[#879FFF] border-gray-300">
                                         <span class="ml-2 text-base text-gray-700">Nonaktif</span>
                                     </label>
@@ -147,254 +148,171 @@
 @endsection
 
 @section('script')
-    <script>
-        // Data daerah
-        const daftarDaerah = [{
-                id: 1,
-                nama: 'Jakarta Pusat'
-            },
-            {
-                id: 2,
-                nama: 'Jakarta Selatan'
-            },
-            {
-                id: 3,
-                nama: 'Jakarta Utara'
-            },
-            {
-                id: 4,
-                nama: 'Jakarta Barat'
-            },
-            {
-                id: 5,
-                nama: 'Jakarta Timur'
-            },
-            {
-                id: 6,
-                nama: 'Bandung'
-            },
-            {
-                id: 7,
-                nama: 'Surabaya'
-            },
-            {
-                id: 8,
-                nama: 'Medan'
-            },
-            {
-                id: 9,
-                nama: 'Yogyakarta'
-            },
-            {
-                id: 10,
-                nama: 'Semarang'
-            },
-            {
-                id: 11,
-                nama: 'Malang'
-            },
-            {
-                id: 12,
-                nama: 'Denpasar'
-            },
-            {
-                id: 13,
-                nama: 'Batam'
-            },
-            {
-                id: 14,
-                nama: 'Palembang'
-            },
-            {
-                id: 15,
-                nama: 'Makassar'
-            },
-            {
-                id: 16,
-                nama: 'Balikpapan'
-            },
-            {
-                id: 17,
-                nama: 'Pontianak'
-            },
-            {
-                id: 18,
-                nama: 'Manado'
-            },
-            {
-                id: 19,
-                nama: 'Pekanbaru'
-            },
-            {
-                id: 20,
-                nama: 'Padang'
-            }
-        ];
+<script>
+    // Data daerah dari controller (ganti array hardcode dengan data dinamis jika sudah siap)
+    const daftarDaerah = @json($daerah);
 
-        const daerahSearch = document.getElementById('daerah_search');
-        const daerahDropdown = document.getElementById('daerah_dropdown');
-        const daerahList = document.getElementById('daerah_list');
-        const idDaerahHidden = document.getElementById('id_daerah');
+    const daerahSearch = document.getElementById('daerah_search');
+    const daerahDropdown = document.getElementById('daerah_dropdown');
+    const daerahList = document.getElementById('daerah_list');
+    const idDaerahHidden = document.getElementById('id_daerah');
 
-        // Render daftar daerah
-        function renderDaerahList(daftarFilter = daftarDaerah, keyword = '') {
-            daerahList.innerHTML = '';
+    // Render daftar daerah
+    function renderDaerahList(daftarFilter = daftarDaerah, keyword = '') {
+        daerahList.innerHTML = '';
 
-            if (daftarFilter.length === 0) {
-                daerahList.innerHTML = '<li class="px-4 py-3 text-gray-500 text-sm">Tidak ada daerah yang ditemukan</li>';
-                return;
-            }
-
-            daftarFilter.forEach(daerah => {
-                const li = document.createElement('li');
-                li.className =
-                    'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
-
-                // Highlight kata yang cocok
-                if (keyword) {
-                    const regex = new RegExp(`(${keyword})`, 'gi');
-                    li.innerHTML = daerah.nama.replace(regex, '<mark class="bg-yellow-200 font-medium">$1</mark>');
-                } else {
-                    li.textContent = daerah.nama;
-                }
-
-                li.onclick = function() {
-                    daerahSearch.value = daerah.nama;
-                    idDaerahHidden.value = daerah.id;
-                    daerahDropdown.classList.add('hidden');
-                    daerahSearch.classList.remove('border-red-500');
-                };
-
-                daerahList.appendChild(li);
-            });
+        if (daftarFilter.length === 0) {
+            daerahList.innerHTML = '<li class="px-4 py-3 text-gray-500 text-sm">Tidak ada daerah yang ditemukan</li>';
+            return;
         }
 
-        // Filter daerah berdasarkan input
-        function filterDaerah(keyword) {
-            if (!keyword.trim()) {
-                renderDaerahList();
-                return;
+        daftarFilter.forEach(daerah => {
+            const li = document.createElement('li');
+            li.className =
+                'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
+
+            // Highlight kata yang cocok
+            if (keyword) {
+                const regex = new RegExp(`(${keyword})`, 'gi');
+                li.innerHTML = daerah.nama.replace(regex, '<mark class="bg-yellow-200 font-medium">$1</mark>');
+            } else {
+                li.textContent = daerah.nama;
             }
 
-            const hasil = daftarDaerah.filter(daerah =>
-                daerah.nama.toLowerCase().includes(keyword.toLowerCase())
-            );
+            // Gunakan onmousedown agar tidak bentrok dengan blur
+            li.onmousedown = function() {
+                daerahSearch.value = daerah.nama;
+                idDaerahHidden.value = daerah.id_daerah;
+                daerahDropdown.classList.add('hidden');
+                daerahSearch.classList.remove('border-red-500');
+            };
 
-            renderDaerahList(hasil, keyword);
+            daerahList.appendChild(li);
+        });
+    }
+
+    // Filter daerah berdasarkan input
+    function filterDaerah(keyword) {
+        if (!keyword.trim()) {
+            renderDaerahList();
+            return;
         }
 
-        // Event listeners untuk daerah search
-        daerahSearch.addEventListener('input', function() {
-            const keyword = this.value.trim();
-            // Jangan reset hidden value jika sedang edit dan nilai masih sama
-            if (this.value !== 'Jakarta Pusat') {
-                idDaerahHidden.value = '';
-            }
-            filterDaerah(keyword);
-            daerahDropdown.classList.remove('hidden');
-        });
+        const hasil = daftarDaerah.filter(daerah =>
+            daerah.nama.toLowerCase().includes(keyword.toLowerCase())
+        );
 
-        daerahSearch.addEventListener('focus', function() {
-            filterDaerah(this.value);
-            daerahDropdown.classList.remove('hidden');
-        });
+        renderDaerahList(hasil, keyword);
+    }
 
-        daerahSearch.addEventListener('blur', function() {
-            // Delay untuk memungkinkan klik pada dropdown
-            setTimeout(() => {
-                daerahDropdown.classList.add('hidden');
-            }, 150);
-        });
+    // Event listeners untuk daerah search
+    daerahSearch.addEventListener('input', function() {
+        const keyword = this.value.trim();
+        idDaerahHidden.value = ''; // Reset hidden value saat mengetik
+        filterDaerah(keyword);
+        daerahDropdown.classList.remove('hidden');
+    });
 
-        // Keyboard navigation
-        let currentIndex = -1;
-        daerahSearch.addEventListener('keydown', function(e) {
-            const items = daerahList.querySelectorAll('li');
+    daerahSearch.addEventListener('focus', function() {
+        filterDaerah(this.value);
+        daerahDropdown.classList.remove('hidden');
+    });
 
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                currentIndex = Math.min(currentIndex + 1, items.length - 1);
-                updateActiveItem(items);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                currentIndex = Math.max(currentIndex - 1, -1);
-                updateActiveItem(items);
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                if (currentIndex >= 0 && items[currentIndex]) {
-                    items[currentIndex].click();
-                    currentIndex = -1;
-                }
-            } else if (e.key === 'Escape') {
-                daerahDropdown.classList.add('hidden');
+    daerahSearch.addEventListener('blur', function() {
+        setTimeout(() => {
+            daerahDropdown.classList.add('hidden');
+        }, 150);
+    });
+
+    // Keyboard navigation
+    let currentIndex = -1;
+    daerahSearch.addEventListener('keydown', function(e) {
+        const items = daerahList.querySelectorAll('li');
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            currentIndex = Math.min(currentIndex + 1, items.length - 1);
+            updateActiveItem(items);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            currentIndex = Math.max(currentIndex - 1, -1);
+            updateActiveItem(items);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (currentIndex >= 0 && items[currentIndex]) {
+                items[currentIndex].dispatchEvent(new Event('mousedown'));
                 currentIndex = -1;
             }
-        });
-
-        function updateActiveItem(items) {
-            items.forEach((item, idx) => {
-                if (idx === currentIndex) {
-                    item.classList.add('bg-blue-100');
-                    item.scrollIntoView({
-                        block: 'nearest'
-                    });
-                } else {
-                    item.classList.remove('bg-blue-100');
-                }
-            });
+        } else if (e.key === 'Escape') {
+            daerahDropdown.classList.add('hidden');
+            currentIndex = -1;
         }
+    });
 
-        // Render initial list
-        renderDaerahList();
-
-        // Toggle password visibility
-        function togglePassword() {
-            const passwordField = document.getElementById('password');
-            const passwordIcon = document.getElementById('passwordIcon');
-
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                passwordIcon.className = 'bx bx-show text-gray-400 text-xl';
+    function updateActiveItem(items) {
+        items.forEach((item, idx) => {
+            if (idx === currentIndex) {
+                item.classList.add('bg-blue-100');
+                item.scrollIntoView({
+                    block: 'nearest'
+                });
             } else {
-                passwordField.type = 'password';
-                passwordIcon.className = 'bx bx-hide text-gray-400 text-xl';
+                item.classList.remove('bg-blue-100');
             }
+        });
+    }
+
+    // Render initial list
+    renderDaerahList();
+
+    // Toggle password visibility
+    function togglePassword() {
+        const passwordField = document.getElementById('password');
+        const passwordIcon = document.getElementById('passwordIcon');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            passwordIcon.className = 'bx bx-show text-gray-400 text-xl';
+        } else {
+            passwordField.type = 'password';
+            passwordIcon.className = 'bx bx-hide text-gray-400 text-xl';
+        }
+    }
+
+    // Form validation untuk edit
+    document.getElementById('formKurir').addEventListener('submit', function(e) {
+        const requiredFields = ['nama', 'username', 'no_hp'];
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+            const input = document.getElementById(field);
+            if (!input.value.trim()) {
+                isValid = false;
+                input.classList.add('border-red-500');
+                input.focus();
+            } else {
+                input.classList.remove('border-red-500');
+            }
+        });
+
+        // Validasi khusus untuk daerah
+        if (!idDaerahHidden.value) {
+            isValid = false;
+            daerahSearch.classList.add('border-red-500');
+            daerahSearch.focus();
         }
 
-        // Form validation untuk edit
-        document.getElementById('formKurir').addEventListener('submit', function(e) {
-            const requiredFields = ['nama', 'username', 'no_hp'];
-            let isValid = true;
+        if (!isValid) {
+            e.preventDefault();
+            alert('Mohon lengkapi semua field yang wajib diisi!');
+        }
+    });
 
-            requiredFields.forEach(field => {
-                const input = document.getElementById(field);
-                if (!input.value.trim()) {
-                    isValid = false;
-                    input.classList.add('border-red-500');
-                    input.focus();
-                } else {
-                    input.classList.remove('border-red-500');
-                }
-            });
-
-            // Validasi khusus untuk daerah
-            if (!idDaerahHidden.value) {
-                isValid = false;
-                daerahSearch.classList.add('border-red-500');
-                daerahSearch.focus();
-            }
-
-            if (!isValid) {
-                e.preventDefault();
-                alert('Mohon lengkapi semua field yang wajib diisi!');
-            }
+    // Remove error styling when user types
+    document.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('input', function() {
+            this.classList.remove('border-red-500');
         });
-
-        // Remove error styling when user types
-        document.querySelectorAll('input, select').forEach(input => {
-            input.addEventListener('input', function() {
-                this.classList.remove('border-red-500');
-            });
-        });
-    </script>
+    });
+</script>
 @endsection
