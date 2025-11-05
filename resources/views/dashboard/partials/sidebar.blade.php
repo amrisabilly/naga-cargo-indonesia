@@ -3,7 +3,7 @@
     class="flex-shrink-0 w-56 flex flex-col items-center bg-white pt-5 pl-10 pr-6 border-r-2 border-[#E6EFF5]">
     {{-- LOGO PERUSAHAAN --}}
     <div class="flex justify-between items-center gap-8">
-        <h1 id="logoText" class="text-3xl font-extrabold"><span class="bg-[#122F50] text-white px-2">CAR</span><span
+        <h1 id="logoText" class="text-3xl font-extrabold"><span class="bg-[#879FFF] text-white px-2">CAR</span><span
                 class="italic text-[#122F50]">GO</span></h1>
         {{-- Hamburger Menu --}}
         <i id="hamburgerMenu"
