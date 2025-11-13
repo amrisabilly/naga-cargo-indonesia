@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\DataKurirController;
 Route::get('/', [DataController::class, 'index'])->name('index');
 
 Route::prefix('dashboard')->name('dashboard.')->group(function(){
+    Route::get('/data-pengiriman/daerah/{id_daerah}', [DataPengiriman::class, 'showByDaerah'])->name('data-pengiriman.daerah');
     Route::resource('/data-pengiriman', DataPengiriman::class);
     Route::get('/daerah', [DataPengiriman::class, 'daerah'])->name('daerah');
     Route::resource('/data-kurir', DataKurirController::class);

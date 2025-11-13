@@ -17,8 +17,9 @@
 
                     <!-- Daerah Terdaftar -->
                     <div class="mt-6">
+                        
                         <div class="font-semibold text-gray-700 mb-3">
-                            Daerah Terdaftar:
+                            Preview Daerah Terdaftar:
                             <span id="jumlah-hasil" class="text-sm font-normal text-gray-500"></span>
                         </div>
                         <div class="border border-gray-200 rounded-lg max-h-60 overflow-y-auto">
@@ -38,87 +39,61 @@
 
 @section('script')
     <script>
-        // Daftar daerah terdaftar (bisa diganti dari backend)
-        const daftarDaerah = [
-            'Jakarta Pusat',
-            'Jakarta Selatan',
-            'Jakarta Utara',
-            'Jakarta Barat',
-            'Jakarta Timur',
-            'Bandung',
-        ];
+        const daftarDaerah = @json($daerah);
 
         const inputDaerah = document.getElementById('input-daerah');
         const daftarTerdaftar = document.getElementById('daftar-terdaftar');
         const jumlahHasil = document.getElementById('jumlah-hasil');
         const tidakDitemukan = document.getElementById('tidak-ditemukan');
 
-        // Tampilkan daftar daerah terdaftar dalam bentuk list
-        function renderDaerahTerdaftar(daftarFilter = daftarDaerah, keyword = '') {
+        function renderDaerahList(daftarFilter = daftarDaerah, keyword = '') {
             daftarTerdaftar.innerHTML = '';
-
             if (daftarFilter.length === 0) {
-                daftarTerdaftar.classList.add('hidden');
                 tidakDitemukan.classList.remove('hidden');
-                jumlahHasil.textContent = '(0 daerah)';
+                jumlahHasil.textContent = '';
                 return;
             }
-
-            daftarTerdaftar.classList.remove('hidden');
             tidakDitemukan.classList.add('hidden');
             jumlahHasil.textContent = `(${daftarFilter.length} daerah)`;
 
-            daftarFilter.forEach((nama, index) => {
+            daftarFilter.forEach(daerah => {
                 const li = document.createElement('li');
-                li.className =
-                    'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
+                li.className = 'px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors duration-150';
 
-                // Highlight kata yang cocok jika ada keyword
+                // Buat link ke route detail pengiriman daerah
+                li.onclick = function() {
+                    window.location.href = `/dashboard/data-pengiriman/daerah/${daerah.id_daerah}`;
+                };
+
                 if (keyword) {
                     const regex = new RegExp(`(${keyword})`, 'gi');
-                    li.innerHTML = nama.replace(regex, '<mark class="bg-yellow-200 font-medium">$1</mark>');
+                    li.innerHTML = daerah.nama.replace(regex, '<mark class="bg-yellow-200 font-medium">$1</mark>');
                 } else {
-                    li.textContent = nama;
+                    li.textContent = daerah.nama;
                 }
-
-                li.onclick = function() {
-                    inputDaerah.value = nama;
-                    inputDaerah.focus();
-                };
                 daftarTerdaftar.appendChild(li);
             });
         }
 
-        // Filter daerah berdasarkan input
         function filterDaerah(keyword) {
             if (!keyword.trim()) {
-                renderDaerahTerdaftar();
+                // Tampilkan hanya 5 daerah teratas jika tidak ada pencarian
+                renderDaerahList(daftarDaerah.slice(0, 5));
                 return;
             }
-
-            const hasil = daftarDaerah.filter(nama =>
-                nama.toLowerCase().includes(keyword.toLowerCase())
+            // Tampilkan hasil pencarian saja
+            const hasil = daftarDaerah.filter(daerah =>
+                daerah.nama.toLowerCase().includes(keyword.toLowerCase())
             );
-
-            renderDaerahTerdaftar(hasil, keyword);
+            renderDaerahList(hasil, keyword);
         }
 
-        // Event listener untuk input
         inputDaerah.addEventListener('input', function() {
             const keyword = this.value.trim();
             filterDaerah(keyword);
         });
 
-        // Clear filter saat input kosong
-        inputDaerah.addEventListener('keyup', function(e) {
-            if (e.key === 'Escape') {
-                this.value = '';
-                filterDaerah('');
-                this.focus();
-            }
-        });
-
-        // Render awal
-        renderDaerahTerdaftar();
+        // Tampilkan 5 daerah teratas saat pertama kali load
+        renderDaerahList(daftarDaerah.slice(0, 5));
     </script>
 @endsection
