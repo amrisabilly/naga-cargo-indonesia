@@ -9,14 +9,20 @@
     <section class="flex w-full pt-10">
         <div class="flex flex-col w-full">
             <div class="w-full">
-                <div class="mb-6 flex justify-between items-start flex-shrink-0">
-                    <div>
+                <div class="flex items-start gap-7 mb-8">
+                    {{-- Tombol kembali --}}
+                    <a href="{{ url()->previous() }}"
+                        class="inline-flex items-center px-3 py-2 rounded-lg bg-[#4A90E2] hover:bg-[#357ABD] text-white text-base font-semibold shadow transition-colors"
+                        title="Kembali">
+                        <i class="bx bx-arrow-back text-xl mr-1"></i>
+                    </a>
+                    <div class="flex flex-col">
                         <h1 class="text-3xl font-bold text-gray-900">Tambah Akun PIC</h1>
                         <p class="mt-1 text-base text-gray-500">Kelola data PIC (Person In Charge)</p>
                     </div>
                 </div>
                 <div class="bg-white py-6 px-8 rounded-lg shadow-sm">
-                    <form id="formPIC" action="{{route('dashboard.data-kurir.store')}}" method="POST">
+                    <form id="formPIC" action="{{ route('dashboard.data-kurir.store') }}" method="POST">
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Nama Lengkap -->
@@ -86,9 +92,10 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Cari dan pilih daerah...">
                                 <input type="hidden" id="id_daerah" name="id_daerah" required>
-                                
+
                                 <!-- Dropdown daerah -->
-                                <div id="daerah_dropdown" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
+                                <div id="daerah_dropdown"
+                                    class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
                                     <ul id="daerah_list" class="divide-y divide-gray-100">
                                         <!-- Options akan diisi via JavaScript -->
                                     </ul>
@@ -145,69 +152,70 @@
 @endsection
 
 @section('script')
-<script>
-    const daftarDaerah = @json($daerah);
+    <script>
+        const daftarDaerah = @json($daerah);
 
-    const daerahSearch = document.getElementById('daerah_search');
-    const daerahDropdown = document.getElementById('daerah_dropdown');
-    const daerahList = document.getElementById('daerah_list');
-    const idDaerahHidden = document.getElementById('id_daerah');
+        const daerahSearch = document.getElementById('daerah_search');
+        const daerahDropdown = document.getElementById('daerah_dropdown');
+        const daerahList = document.getElementById('daerah_list');
+        const idDaerahHidden = document.getElementById('id_daerah');
 
-    function renderDaerahList(daftarFilter = daftarDaerah, keyword = '') {
-        daerahList.innerHTML = '';
-        if (daftarFilter.length === 0) {
-            daerahList.innerHTML = '<li class="px-4 py-3 text-gray-500 text-sm">Tidak ada daerah yang ditemukan</li>';
-            return;
-        }
-        daftarFilter.forEach(daerah => {
-            const li = document.createElement('li');
-            li.className = 'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
-            if (keyword) {
-                const regex = new RegExp(`(${keyword})`, 'gi');
-                li.innerHTML = daerah.nama.replace(regex, '<mark class="bg-yellow-200 font-medium">$1</mark>');
-            } else {
-                li.textContent = daerah.nama;
+        function renderDaerahList(daftarFilter = daftarDaerah, keyword = '') {
+            daerahList.innerHTML = '';
+            if (daftarFilter.length === 0) {
+                daerahList.innerHTML = '<li class="px-4 py-3 text-gray-500 text-sm">Tidak ada daerah yang ditemukan</li>';
+                return;
             }
-            li.onmousedown = function() {
-                daerahSearch.value = daerah.nama;
-                idDaerahHidden.value = daerah.id_daerah;
-                daerahDropdown.classList.add('hidden');
-                daerahSearch.classList.remove('border-red-500');
-            };
-            daerahList.appendChild(li);
-        });
-    }
-
-    function filterDaerah(keyword) {
-        if (!keyword.trim()) {
-            renderDaerahList();
-            return;
+            daftarFilter.forEach(daerah => {
+                const li = document.createElement('li');
+                li.className =
+                    'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
+                if (keyword) {
+                    const regex = new RegExp(`(${keyword})`, 'gi');
+                    li.innerHTML = daerah.nama.replace(regex, '<mark class="bg-yellow-200 font-medium">$1</mark>');
+                } else {
+                    li.textContent = daerah.nama;
+                }
+                li.onmousedown = function() {
+                    daerahSearch.value = daerah.nama;
+                    idDaerahHidden.value = daerah.id_daerah;
+                    daerahDropdown.classList.add('hidden');
+                    daerahSearch.classList.remove('border-red-500');
+                };
+                daerahList.appendChild(li);
+            });
         }
-        const hasil = daftarDaerah.filter(daerah =>
-            daerah.nama.toLowerCase().includes(keyword.toLowerCase())
-        );
-        renderDaerahList(hasil, keyword);
-    }
 
-    daerahSearch.addEventListener('input', function() {
-        const keyword = this.value.trim();
-        idDaerahHidden.value = '';
-        filterDaerah(keyword);
-        daerahDropdown.classList.remove('hidden');
-    });
+        function filterDaerah(keyword) {
+            if (!keyword.trim()) {
+                renderDaerahList();
+                return;
+            }
+            const hasil = daftarDaerah.filter(daerah =>
+                daerah.nama.toLowerCase().includes(keyword.toLowerCase())
+            );
+            renderDaerahList(hasil, keyword);
+        }
 
-    daerahSearch.addEventListener('focus', function() {
-        filterDaerah(this.value);
-        daerahDropdown.classList.remove('hidden');
-    });
+        daerahSearch.addEventListener('input', function() {
+            const keyword = this.value.trim();
+            idDaerahHidden.value = '';
+            filterDaerah(keyword);
+            daerahDropdown.classList.remove('hidden');
+        });
 
-    daerahSearch.addEventListener('blur', function() {
-        setTimeout(() => {
-            daerahDropdown.classList.add('hidden');
-        }, 150);
-    });
+        daerahSearch.addEventListener('focus', function() {
+            filterDaerah(this.value);
+            daerahDropdown.classList.remove('hidden');
+        });
 
-    // Render initial list
-    renderDaerahList();
-</script>
+        daerahSearch.addEventListener('blur', function() {
+            setTimeout(() => {
+                daerahDropdown.classList.add('hidden');
+            }, 150);
+        });
+
+        // Render initial list
+        renderDaerahList();
+    </script>
 @endsection

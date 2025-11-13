@@ -9,8 +9,14 @@
     <section class="flex w-full pt-10">
         <div class="flex flex-col w-full">
             <div class="w-full">
-                <div class="mb-6 flex justify-between items-start flex-shrink-0">
-                    <div>
+                <div class="flex items-start gap-7 mb-8">
+                    {{-- Tombol kembali --}}
+                    <a href="{{ url()->previous() }}"
+                        class="inline-flex items-center px-3 py-2 rounded-lg bg-[#4A90E2] hover:bg-[#357ABD] text-white text-base font-semibold shadow transition-colors"
+                        title="Kembali">
+                        <i class="bx bx-arrow-back text-xl mr-1"></i>
+                    </a>
+                    <div class="flex flex-col">
                         <h1 class="text-3xl font-bold text-gray-900">Edit Akun PIC</h1>
                         <p class="mt-1 text-base text-gray-500">Kelola data PIC (Person In Charge)</p>
                     </div>
@@ -87,9 +93,10 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Cari dan pilih daerah...">
                                 <input type="hidden" id="id_daerah" name="id_daerah" required value="6">
-                                
+
                                 <!-- Dropdown daerah -->
-                                <div id="daerah_dropdown" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
+                                <div id="daerah_dropdown"
+                                    class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
                                     <ul id="daerah_list" class="divide-y divide-gray-100">
                                         <!-- Options akan diisi via JavaScript -->
                                     </ul>
@@ -148,27 +155,86 @@
 @section('script')
     <script>
         // Data daerah
-        const daftarDaerah = [
-            { id: 1, nama: 'Jakarta Pusat' },
-            { id: 2, nama: 'Jakarta Selatan' },
-            { id: 3, nama: 'Jakarta Utara' },
-            { id: 4, nama: 'Jakarta Barat' },
-            { id: 5, nama: 'Jakarta Timur' },
-            { id: 6, nama: 'Bandung' },
-            { id: 7, nama: 'Surabaya' },
-            { id: 8, nama: 'Medan' },
-            { id: 9, nama: 'Yogyakarta' },
-            { id: 10, nama: 'Semarang' },
-            { id: 11, nama: 'Malang' },
-            { id: 12, nama: 'Denpasar' },
-            { id: 13, nama: 'Batam' },
-            { id: 14, nama: 'Palembang' },
-            { id: 15, nama: 'Makassar' },
-            { id: 16, nama: 'Balikpapan' },
-            { id: 17, nama: 'Pontianak' },
-            { id: 18, nama: 'Manado' },
-            { id: 19, nama: 'Pekanbaru' },
-            { id: 20, nama: 'Padang' }
+        const daftarDaerah = [{
+                id: 1,
+                nama: 'Jakarta Pusat'
+            },
+            {
+                id: 2,
+                nama: 'Jakarta Selatan'
+            },
+            {
+                id: 3,
+                nama: 'Jakarta Utara'
+            },
+            {
+                id: 4,
+                nama: 'Jakarta Barat'
+            },
+            {
+                id: 5,
+                nama: 'Jakarta Timur'
+            },
+            {
+                id: 6,
+                nama: 'Bandung'
+            },
+            {
+                id: 7,
+                nama: 'Surabaya'
+            },
+            {
+                id: 8,
+                nama: 'Medan'
+            },
+            {
+                id: 9,
+                nama: 'Yogyakarta'
+            },
+            {
+                id: 10,
+                nama: 'Semarang'
+            },
+            {
+                id: 11,
+                nama: 'Malang'
+            },
+            {
+                id: 12,
+                nama: 'Denpasar'
+            },
+            {
+                id: 13,
+                nama: 'Batam'
+            },
+            {
+                id: 14,
+                nama: 'Palembang'
+            },
+            {
+                id: 15,
+                nama: 'Makassar'
+            },
+            {
+                id: 16,
+                nama: 'Balikpapan'
+            },
+            {
+                id: 17,
+                nama: 'Pontianak'
+            },
+            {
+                id: 18,
+                nama: 'Manado'
+            },
+            {
+                id: 19,
+                nama: 'Pekanbaru'
+            },
+            {
+                id: 20,
+                nama: 'Padang'
+            }
         ];
 
         const daerahSearch = document.getElementById('daerah_search');
@@ -187,8 +253,9 @@
 
             daftarFilter.forEach(daerah => {
                 const li = document.createElement('li');
-                li.className = 'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
-                
+                li.className =
+                    'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
+
                 // Highlight kata yang cocok
                 if (keyword) {
                     const regex = new RegExp(`(${keyword})`, 'gi');
@@ -215,10 +282,10 @@
                 return;
             }
 
-            const hasil = daftarDaerah.filter(daerah => 
+            const hasil = daftarDaerah.filter(daerah =>
                 daerah.nama.toLowerCase().includes(keyword.toLowerCase())
             );
-            
+
             renderDaerahList(hasil, keyword);
         }
 
@@ -249,7 +316,7 @@
         let currentIndex = -1;
         daerahSearch.addEventListener('keydown', function(e) {
             const items = daerahList.querySelectorAll('li');
-            
+
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
                 currentIndex = Math.min(currentIndex + 1, items.length - 1);
@@ -274,7 +341,9 @@
             items.forEach((item, idx) => {
                 if (idx === currentIndex) {
                     item.classList.add('bg-blue-100');
-                    item.scrollIntoView({ block: 'nearest' });
+                    item.scrollIntoView({
+                        block: 'nearest'
+                    });
                 } else {
                     item.classList.remove('bg-blue-100');
                 }

@@ -6,12 +6,17 @@
 @endsection
 
 @section('content')
-{{-- @dd($daerah) --}}
     <section class="flex w-full pt-10">
         <div class="flex flex-col w-full">
             <div class="w-full">
-                <div class="mb-6 flex justify-between items-start flex-shrink-0">
-                    <div>
+                <div class="flex items-start gap-7 mb-8">
+                    {{-- Tombol kembali --}}
+                    <a href="{{ url()->previous() }}"
+                        class="inline-flex items-center px-3 py-2 rounded-lg bg-[#4A90E2] hover:bg-[#357ABD] text-white text-base font-semibold shadow transition-colors"
+                        title="Kembali">
+                        <i class="bx bx-arrow-back text-xl mr-1"></i>
+                    </a>
+                    <div class="flex flex-col">
                         <h1 class="text-3xl font-bold text-gray-900">Tambah Akun Kurir</h1>
                         <p class="mt-1 text-base text-gray-500">Kelola data kurir</p>
                     </div>
@@ -87,9 +92,10 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Cari dan pilih daerah...">
                                 <input type="hidden" id="id_daerah" name="id_daerah" required>
-                                
+
                                 <!-- Dropdown daerah -->
-                                <div id="daerah_dropdown" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
+                                <div id="daerah_dropdown"
+                                    class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
                                     <ul id="daerah_list" class="divide-y divide-gray-100">
                                         <!-- Options akan diisi via JavaScript -->
                                     </ul>
@@ -147,7 +153,7 @@
 
 @section('script')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const daftarDaerah = @json($daerah); // Data daerah dari controller
             const daerahSearch = document.getElementById('daerah_search');
             const daerahDropdown = document.getElementById('daerah_dropdown');
@@ -159,17 +165,19 @@
                 daerahList.innerHTML = ''; // Kosongkan daftar dropdown
 
                 if (daftarFilter.length === 0) {
-                    daerahList.innerHTML = '<li class="px-4 py-3 text-gray-500 text-sm">Tidak ada daerah yang ditemukan</li>';
+                    daerahList.innerHTML =
+                        '<li class="px-4 py-3 text-gray-500 text-sm">Tidak ada daerah yang ditemukan</li>';
                     return;
                 }
 
                 daftarFilter.forEach(daerah => {
                     const li = document.createElement('li');
-                    li.className = 'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
+                    li.className =
+                        'px-4 py-3 hover:bg-gray-50 cursor-pointer text-sm text-gray-700 transition-colors duration-150';
                     li.textContent = daerah.nama;
 
                     // Ketika daerah dipilih
-                    li.onmousedown = function () {
+                    li.onmousedown = function() {
                         daerahSearch.value = daerah.nama;
                         idDaerahHidden.value = daerah.id_daerah; // Ganti jika bukan 'id'
                         console.log('ID Daerah:', idDaerahHidden.value);
@@ -190,7 +198,7 @@
             }
 
             // Event listener untuk input pencarian
-            daerahSearch.addEventListener('input', function () {
+            daerahSearch.addEventListener('input', function() {
                 const keyword = this.value.trim();
                 idDaerahHidden.value = ''; // Reset nilai ID daerah saat mengetik
                 if (keyword) {
@@ -203,7 +211,7 @@
             });
 
             // Tampilkan dropdown saat input difokuskan
-            daerahSearch.addEventListener('focus', function () {
+            daerahSearch.addEventListener('focus', function() {
                 if (this.value.trim()) {
                     filterDaerah(this.value.trim());
                 } else {
@@ -213,7 +221,7 @@
             });
 
             // Sembunyikan dropdown saat input kehilangan fokus
-            daerahSearch.addEventListener('blur', function () {
+            daerahSearch.addEventListener('blur', function() {
                 setTimeout(() => {
                     daerahDropdown.classList.add('hidden');
                 }, 150); // Beri jeda untuk memungkinkan klik pada dropdown

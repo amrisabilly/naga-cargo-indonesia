@@ -65,9 +65,9 @@
                     </div>
                     <div class="flex gap-3">
                         {{-- Tambah PIC Button --}}
-                        <a href="{{route('dashboard.data-pic.create')}}">
+                        <a href="{{ route('dashboard.data-pic.create') }}">
                             <button
-                                class="bg-[#879FFF] hover:bg-[#6B7EF7] text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors shadow-sm text-sm">
+                                class="bg-[#4A90E2] hover:bg-[#4A90E2] text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors shadow-sm text-sm">
                                 <i class="bx bx-plus text-lg"></i>
                                 Tambah pic
                             </button>
@@ -90,47 +90,61 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pics as $i => $pic)
-                                <tr>
-                                    <td>{{ $i+1 }}</td>
-                                    <td>{{ $pic->nama }}</td>
-                                    <td>
-                                        <div class="credential-item">
-                                            <span class="credential-text text-[#879FFF] font-semibold">{{ $pic->username }}</span>
-                                            <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
-                                                onclick="copyToClipboard('{{ $pic->username }}', this)" title="Salin Username">
-                                                <i class="bx bx-copy text-base"></i>
+                                @foreach ($pics as $i => $pic)
+                                    <tr>
+                                        <td style="text-align: center">{{ $i + 1 }}</td>
+                                        <td>{{ $pic->nama }}</td>
+                                        <td>
+                                            <div class="credential-item">
+                                                <span class="credential-text ">{{ $pic->username }}</span>
+                                                <button class="copy-btn p-1 rounded text-gray-500 "
+                                                    onclick="copyToClipboard('{{ $pic->username }}', this)"
+                                                    title="Salin Username">
+                                                    <i class="bx bx-copy text-base"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="credential-item">
+                                                <span class="credential-text">{{ $pic->password }}</span>
+                                                <button class="copy-btn p-1 rounded text-gray-500 "
+                                                    onclick="copyToClipboard('{{ $pic->password }}', this)"
+                                                    title="Salin Password">
+                                                    <i class="bx bx-copy text-base"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pic->no_hp) }}?text={{ urlencode('Halo ' . $pic->nama . ', saya ingin menghubungi Anda terkait akun PIC.') }}"
+                                                target="_blank"
+                                                class="text-[#25D366] hover:underline font-semibold flex items-center gap-1"
+                                                title="Chat WhatsApp">
+                                                <i class="bx bxl-whatsapp text-lg"></i>
+                                                {{ $pic->no_hp }}
+                                            </a>
+                                        </td>
+                                        <td>{{ $pic->daerah->nama ?? 'N/A' }}</td>
+                                        <td>
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full {{ $pic->status == 'Aktif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                <div
+                                                    class="w-1.5 h-1.5 {{ $pic->status == 'Aktif' ? 'bg-green-500' : 'bg-red-500' }} rounded-full mr-2">
+                                                </div>
+                                                {{ $pic->status }}
+                                            </span>
+                                        </td>
+                                        <td class="flex flex-row justify-center gap-2">
+                                            <a href="{{ route('dashboard.data-pic.edit', $pic->id_user) }}"
+                                                class="inline-flex items-start justify-start rounded bg-yellow-500 p-3 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2">
+                                                <i class="bx bx-edit text-white"></i>
+                                            </a>
+                                            <button type="button"
+                                                onclick="openDeleteModal('{{ $pic->id_user }}', '{{ $pic->nama }}')"
+                                                class="focus:ring-2 focus:ring-offset-2 inline-flex items-start justify-start p-3 bg-red-500 hover:bg-red-600 focus:outline-none rounded">
+                                                <i class="bx bx-trash-alt text-white"></i>
                                             </button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="credential-item">
-                                            <span class="credential-text">{{ $pic->password }}</span>
-                                            <button class="copy-btn p-1 rounded text-gray-500 hover:text-[#879FFF]"
-                                                onclick="copyToClipboard('{{ $pic->password }}', this)" title="Salin Password">
-                                                <i class="bx bx-copy text-base"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td>{{ $pic->no_hp }}</td>
-                                    <td>{{ $pic->daerah->nama ?? 'N/A' }}</td>
-                                    <td>
-                                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full {{ $pic->status == 'Aktif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                            <div class="w-1.5 h-1.5 {{ $pic->status == 'Aktif' ? 'bg-green-500' : 'bg-red-500' }} rounded-full mr-2"></div>
-                                            {{ $pic->status }}
-                                        </span>
-                                    </td>
-                                    <td class="flex flex-row justify-center gap-2">
-                                        <a href="{{ route('dashboard.data-pic.edit', $pic->id_user) }}"
-                                            class="inline-flex items-start justify-start rounded bg-yellow-500 p-3 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2">
-                                            <i class="bx bx-edit text-white"></i>
-                                        </a>
-                                        <button type="button" onclick="openDeleteModal('{{ $pic->id_user }}', '{{ $pic->nama }}')"
-                                            class="focus:ring-2 focus:ring-offset-2 inline-flex items-start justify-start p-3 bg-red-500 hover:bg-red-600 focus:outline-none rounded">
-                                            <i class="bx bx-trash-alt text-white"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -152,10 +166,10 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="rounded-lg bg-[#879FFF] w-full px-6 py-2 text-white text-center hover:bg-[#879FFF] focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2">Hapus</button>
+                                            class="rounded-lg bg-[#4A90E2] w-full px-6 py-2 text-white text-center hover:bg-[#4A90E2] focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2">Hapus</button>
                                     </form>
                                     <button type="button"
-                                        class="rounded-lg border border-[#879FFF] w-1/2 px-6 py-2 text-[#879FFF] focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2"
+                                        class="rounded-lg border border-[#4A90E2] w-1/2 px-6 py-2 text-[#4A90E2] focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2"
                                         onclick="closeDeleteModal()">Batal</button>
                                 </div>
                             </div>
