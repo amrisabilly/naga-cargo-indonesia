@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Daerah;
+use App\Models\Order;
+use App\Models\OrderFoto;
 use Illuminate\Http\Request;
 
 class DataPengiriman extends Controller
@@ -17,7 +20,28 @@ class DataPengiriman extends Controller
 
     public function daerah()
     {
-        return view('dashboard.data.daerah');
+        // Menampilkan halaman data daerah pengiriman
+        $daerah = Daerah::select('id_daerah', 'nama')->get();
+        return view('dashboard.data.daerah', compact('daerah'));
+    }
+
+    public function showByDaerah($id_daerah)
+    {
+        // Ambil data daerah
+        $daerah = Daerah::where('id_daerah', $id_daerah)->firstOrFail();
+
+        // Eager load relasi user (kurir)
+        $pengiriman = Order::with('user')->where('id_daerah', $id_daerah)->get();
+
+        return view('dashboard.data.index', compact('daerah', 'pengiriman'));
+    }
+
+    // show detail pengiriman
+    public function show(string $AWB)
+    {
+        $order = Order::with('user')->where('AWB', $AWB)->firstOrFail();
+        $fotos = OrderFoto::where('AWB', $AWB)->get();
+        return view('dashboard.data.show', compact('order', 'fotos'));
     }
 
     /**
@@ -34,18 +58,6 @@ class DataPengiriman extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        // Sementara return view dengan dummy data
-        // Nanti bisa diganti dengan data dari database
-        return view('dashboard.data.show', [
-            'id' => $id
-        ]);
     }
 
     /**

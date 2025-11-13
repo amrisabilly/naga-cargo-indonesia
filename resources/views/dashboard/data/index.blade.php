@@ -60,7 +60,7 @@
             <div class="w-full ">
                 <div class="mb-6 flex justify-between items-start flex-shrink-0">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Data Pengiriman</h1>
+                        <h1 class="text-3xl font-bold text-gray-900">Data Pengiriman <span class="font-bold">{{$daerah->nama}}</span></h1>
                         <p class="mt-1 text-base text-gray-500">Kelola data pengiriman</p>
                     </div>
                 </div>
@@ -80,35 +80,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-left">
-                                    <td class="">1</td>
-                                    <td class=" font-mono text-blue-600">PKG001</td>
-                                    <td>John Doe</td>
-                                    <td>Jane Smith</td>
-                                    <td>SD Nusantara</td>
-                                    <td class="text-center">14 Jan 2024</td>
-                                    <td class="">
-                                        <span
-                                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1"></div>
-                                            Terkirim
+                                @forelse($pengiriman ?? [] as $i => $order)
+                                <tr>
+                                    <td style="text-align: center">{{ $i + 1 }}</td>
+                                    <td class="font-mono text-blue-600" style="text-align: center">{{ $order->AWB ?? '-' }}</td>
+                                    <td style="text-align: center">{{ $order->user->nama ?? '-' }}</td> <!-- Nama Kurir -->
+                                    <td style="text-align: center">{{ $order->penerima ?? '-' }}</td>   <!-- Nama Penerima -->
+                                    <td style="text-align: center">{{ $order->tujuan ?? '-' }}</td>
+                                    <td style="text-align: center">{{ $order->tanggal ?? '-' }}</td>
+                                    <td style="text-align: center">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
+                                            {{ $order->status == 'Terkirim' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                            <div class="w-1.5 h-1.5 {{ $order->status == 'Terkirim' ? 'bg-green-500' : 'bg-yellow-500' }} rounded-full mr-1"></div>
+                                            {{ $order->status ?? '-' }}
                                         </span>
                                     </td>
                                     <td class="text-center">
                                         <div class="flex justify-center gap-2">
-                                            <a href="{{ route('dashboard.data-pengiriman.show', 'PKG001') }}"
-                                                class="inline-flex items-center justify-center rounded bg-blue-400 hover:bg-blue-400 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
-                                                title="Lihat Detail">
-                                                <i class="bx bx-show text-white text-lg"></i>
-                                            </a>
-                                            <button type="button" onclick="openDeleteModal('PKG001')"
-                                                class="focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center p-2 bg-red-500 hover:bg-red-600 focus:outline-none rounded transition-colors"
-                                                title="Hapus">
-                                                <i class="bx bx-trash-alt text-white text-lg"></i>
-                                            </button>
+                                            @if(!empty($order->AWB))
+                                                <a href="{{ route('dashboard.data-pengiriman.show', $order->AWB) }}"
+                                                    class="inline-flex items-center justify-center rounded bg-blue-400 hover:bg-blue-400 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
+                                                    title="Lihat Detail">
+                                                    <i class="bx bx-show text-white text-lg"></i>
+                                                </a>
+                                                <button type="button" onclick="openDeleteModal('{{ $order->AWB }}')"
+                                                    class="focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center p-2 bg-red-500 hover:bg-red-600 focus:outline-none rounded transition-colors"
+                                                    title="Hapus">
+                                                    <i class="bx bx-trash-alt text-white text-lg"></i>
+                                                </button>
+                                            @else
+                                                <span class="text-gray-400">-</span>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-gray-500">Tidak ada data pengiriman untuk daerah ini.</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
 
@@ -146,6 +156,10 @@
 
 @section('script')
     <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+
         let deleteModal = document.getElementById('deleteModal');
         let deleteForm = document.getElementById('deleteForm');
 
