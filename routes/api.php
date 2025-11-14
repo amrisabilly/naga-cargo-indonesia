@@ -15,14 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('API')->group(function () {
-    Route::prefix('PIC')->group(function () {
-        Route::post('/login', [PicController::class, 'login']);
-        Route::post('/order', [PicController::class, 'storeOrder']);
-        Route::get('/riwayat-order', [PicController::class, 'riwayatOrder']);
-        
-    });
-    route::prefix('KURIR')->group(function () {
-        // Tambahkan route untuk KURIR di sini
-    });
+
+Route::prefix('PIC')->group(function () {
+    Route::post('/login', [PicController::class, 'login']);
+    Route::post('/order', [PicController::class, 'storeOrder']);
+    Route::get('/riwayat-order', [PicController::class, 'riwayatOrder']);
+});
+route::prefix('KURIR')->group(function () {
+    // Tambahkan route untuk KURIR di sini
 });
