@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Daerah;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +25,18 @@ class PicController extends Controller
             return response()->json(['message' => 'Login gagal'], 401);
         }
 
-        return response()->json(['message' => 'Login berhasil', 'user' => $pic]);
+        // Ambil nama daerah dari relasi
+        $nama_daerah = null;
+        if ($pic->id_daerah) {
+            $daerah = Daerah::find($pic->id_daerah);
+            $nama_daerah = $daerah ? $daerah->nama : "Daerah Tidak Ditemukan";
+        }
+
+        return response()->json([
+            'message' => 'Login berhasil',
+            'user' => $pic,
+            'nama_daerah' => $nama_daerah
+        ]);
     }
 
     // Simpan data order dari PIC

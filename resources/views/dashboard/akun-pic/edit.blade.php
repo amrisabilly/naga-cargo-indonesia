@@ -94,7 +94,17 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Cari dan pilih daerah...">
                                 <input type="hidden" id="id_daerah" name="id_daerah" required value="{{ $pic->id_daerah }}">
-                                <!-- Dropdown daerah tetap -->
+
+                                <!-- Dropdown daerah -->
+                                <div id="daerah_dropdown"
+                                    class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
+                                    <ul id="daerah_list" class="divide-y divide-gray-100">
+                                        <!-- Options akan diisi via JavaScript -->
+                                    </ul>
+                                </div>
+                                @error('id_daerah')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <!-- Status -->
@@ -145,88 +155,8 @@
 
 @section('script')
     <script>
-        // Data daerah
-        const daftarDaerah = [{
-                id: 1,
-                nama: 'Jakarta Pusat'
-            },
-            {
-                id: 2,
-                nama: 'Jakarta Selatan'
-            },
-            {
-                id: 3,
-                nama: 'Jakarta Utara'
-            },
-            {
-                id: 4,
-                nama: 'Jakarta Barat'
-            },
-            {
-                id: 5,
-                nama: 'Jakarta Timur'
-            },
-            {
-                id: 6,
-                nama: 'Bandung'
-            },
-            {
-                id: 7,
-                nama: 'Surabaya'
-            },
-            {
-                id: 8,
-                nama: 'Medan'
-            },
-            {
-                id: 9,
-                nama: 'Yogyakarta'
-            },
-            {
-                id: 10,
-                nama: 'Semarang'
-            },
-            {
-                id: 11,
-                nama: 'Malang'
-            },
-            {
-                id: 12,
-                nama: 'Denpasar'
-            },
-            {
-                id: 13,
-                nama: 'Batam'
-            },
-            {
-                id: 14,
-                nama: 'Palembang'
-            },
-            {
-                id: 15,
-                nama: 'Makassar'
-            },
-            {
-                id: 16,
-                nama: 'Balikpapan'
-            },
-            {
-                id: 17,
-                nama: 'Pontianak'
-            },
-            {
-                id: 18,
-                nama: 'Manado'
-            },
-            {
-                id: 19,
-                nama: 'Pekanbaru'
-            },
-            {
-                id: 20,
-                nama: 'Padang'
-            }
-        ];
+        // Data daerah dari backend
+        const daftarDaerah = @json($daerah);
 
         const daerahSearch = document.getElementById('daerah_search');
         const daerahDropdown = document.getElementById('daerah_dropdown');
