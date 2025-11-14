@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PicController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('API')->group(function () {
+    Route::prefix('PIC')->group(function () {
+        Route::post('/login', [PicController::class, 'login']);
+        Route::post('/order', [PicController::class, 'storeOrder']);
+        Route::get('/riwayat-order', [PicController::class, 'riwayatOrder']);
+        
+    });
+    route::prefix('KURIR')->group(function () {
+        // Tambahkan route untuk KURIR di sini
+    });
 });

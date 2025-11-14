@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama', 100);
             $table->string('username', 50)->unique();
             $table->string('password', 255);
-            $table->string('no_hp', 255);
+            $table->string('no_hp', 255)->nullable()->default(null);
             $table->foreignId('id_daerah')->nullable()->constrained('daerah', 'id_daerah')->cascadeOnUpdate()->nullOnDelete();
             $table->enum('status', ['Aktif', 'Nonaktif'])->default('Aktif');
             $table->timestamps();
