@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="bg-white py-6 px-8 rounded-lg shadow-sm">
-                    <form id="formPIC" action="" method="POST">
+                    <form id="formPIC" action="{{ route('dashboard.data-pic.update', $pic->id_user) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -31,7 +31,7 @@
                                 <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">
                                     Nama Lengkap <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="nama" name="nama" required value="Siti Rahayu"
+                                <input type="text" id="nama" name="nama" required value="{{ $pic->nama }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan nama lengkap PIC">
                                 @error('nama')
@@ -44,7 +44,7 @@
                                 <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
                                     Username <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="username" name="username" required value="siti_pic"
+                                <input type="text" id="username" name="username" required value="{{ $pic->username }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan username">
                                 @error('username')
@@ -76,7 +76,7 @@
                                 <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">
                                     No. Telepon <span class="text-red-500">*</span>
                                 </label>
-                                <input type="tel" id="no_hp" name="no_hp" required value="08987654321"
+                                <input type="tel" id="no_hp" name="no_hp" required value="{{ $pic->no_hp }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan nomor telepon">
                                 @error('no_hp')
@@ -89,21 +89,12 @@
                                 <label for="daerah_search" class="block text-sm font-medium text-gray-700 mb-2">
                                     Daerah <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="daerah_search" autocomplete="off" required value="Bandung"
+                                <input type="text" id="daerah_search" autocomplete="off" required
+                                    value="{{ optional($daerah->where('id_daerah', $pic->id_daerah)->first())->nama }}"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Cari dan pilih daerah...">
-                                <input type="hidden" id="id_daerah" name="id_daerah" required value="6">
-
-                                <!-- Dropdown daerah -->
-                                <div id="daerah_dropdown"
-                                    class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto hidden">
-                                    <ul id="daerah_list" class="divide-y divide-gray-100">
-                                        <!-- Options akan diisi via JavaScript -->
-                                    </ul>
-                                </div>
-                                @error('id_daerah')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
+                                <input type="hidden" id="id_daerah" name="id_daerah" required value="{{ $pic->id_daerah }}">
+                                <!-- Dropdown daerah tetap -->
                             </div>
 
                             <!-- Status -->
@@ -113,12 +104,12 @@
                                 </label>
                                 <div class="flex gap-6">
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="status" value="aktif" checked
+                                        <input type="radio" name="status" value="Aktif" {{ $pic->status == 'Aktif' ? 'checked' : '' }}
                                             class="form-radio h-5 w-5 text-[#879FFF] focus:ring-[#879FFF] border-gray-300">
                                         <span class="ml-2 text-base text-gray-700">Aktif</span>
                                     </label>
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="status" value="nonaktif"
+                                        <input type="radio" name="status" value="Nonaktif" {{ $pic->status == 'Nonaktif' ? 'checked' : '' }}
                                             class="form-radio h-5 w-5 text-[#879FFF] focus:ring-[#879FFF] border-gray-300">
                                         <span class="ml-2 text-base text-gray-700">Nonaktif</span>
                                     </label>
@@ -130,7 +121,7 @@
                         </div>
 
                         <!-- Hidden field untuk role -->
-                        <input type="hidden" name="role" value="pic">
+                        <input type="hidden" name="role" value="PIC">
 
                         <!-- Tombol Action -->
                         <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200">

@@ -53,7 +53,7 @@ class DataPicController extends Controller
                 'status' => $request->status,
             ]);
 
-            return redirect()->route('dashboard.akun-pic.index')->with('success', 'PIC berhasil ditambahkan.');
+            return redirect()->route('dashboard.data-pic.index')->with('success', 'PIC berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menambahkan PIC: ' . $e->getMessage()]);
         }
@@ -100,7 +100,7 @@ class DataPicController extends Controller
 
             $pic->update($data);
 
-            return redirect()->route('dashboard.akun-pic.index')->with('success', 'PIC berhasil diperbarui.');
+            return redirect()->route('dashboard.data-pic.index')->with('success', 'PIC berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui PIC: ' . $e->getMessage()]);
         }
@@ -114,6 +114,6 @@ class DataPicController extends Controller
         $pic = User::where('id_user', $id_user)->firstOrFail();
         $pic->delete();
 
-        return redirect()->route('dashboard.akun-pic.index')->with('success', 'PIC berhasil dihapus.');
+        return redirect()->route('dashboard.data-pic.index')->with('success', 'PIC berhasil dihapus.');
     }
 }
