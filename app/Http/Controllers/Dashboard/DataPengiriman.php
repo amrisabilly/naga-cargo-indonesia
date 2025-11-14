@@ -10,20 +10,6 @@ use Illuminate\Http\Request;
 
 class DataPengiriman extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('dashboard.data.index');
-    }
-
-    public function daerah()
-    {
-        // Menampilkan halaman data daerah pengiriman
-        $daerah = Daerah::select('id_daerah', 'nama')->get();
-        return view('dashboard.data.daerah', compact('daerah'));
-    }
 
     public function showByDaerah($id_daerah)
     {
@@ -33,7 +19,7 @@ class DataPengiriman extends Controller
         // Eager load relasi user (kurir)
         $pengiriman = Order::with('user')->where('id_daerah', $id_daerah)->get();
 
-        return view('dashboard.data.index', compact('daerah', 'pengiriman'));
+        return view('dashboard.data.detail', compact('daerah', 'pengiriman'));
     }
 
     // show detail pengiriman
@@ -44,47 +30,4 @@ class DataPengiriman extends Controller
         return view('dashboard.data.show', compact('order', 'fotos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

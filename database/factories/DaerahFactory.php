@@ -25,10 +25,8 @@ class DaerahFactory extends Factory
     public function definition()
     {
         return [
-            'kode' => $this->faker->unique()->regexify('[A-Z0-9]{1,5}'),
+            'kode_daerah' => $this->faker->unique()->regexify('[A-Z0-9]{1,5}'),
             'nama' => $this->faker->text(50),
-            'latitude' => $this->faker->regexify('-?[0-9]{1,2}\.[0-9]{1,6}'),
-            'longitude' => $this->faker->regexify('-?[0-9]{1,3}\.[0-9]{1,6}'),
         ];
     }
 }

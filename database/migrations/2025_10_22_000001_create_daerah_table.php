@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('daerah', function (Blueprint $table) {
             $table->id('id_daerah');
-            $table->string('kode', 5);
+            $table->string('kode_daerah', 5);
             $table->string('nama', 50);
-            $table->string('latitude', 30)->nullable();
-            $table->string('longitude', 30)->nullable();
             $table->timestamps();
         });
     }
