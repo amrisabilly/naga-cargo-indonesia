@@ -11,10 +11,7 @@
 
 <body class="font-plusJakartaSans">
     <div class="flex h-screen w-full select-none">
-        {{-- Sidebar --}}
         @include('dashboard.partials.sidebar')
-
-        {{-- Main Content --}}
         <main class="main-content flex-1 overflow-y-auto bg-[#F5F7FA] px-10 py-2">
             @yield('content')
         </main>

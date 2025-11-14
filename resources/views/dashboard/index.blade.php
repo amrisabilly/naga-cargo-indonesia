@@ -26,8 +26,8 @@
                     <span class="text-[33px] font-bold">
                         {{ $totalPengiriman }}
                     </span>
-                    <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
-                        <i class='bx bx-package text-3xl text-[#879FFF]'></i>
+                    <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#4A90E2]/10">
+                        <i class='bx bx-package text-3xl text-[#4A90E2]'></i>
                     </div>
                 </div>
             </div>
@@ -41,8 +41,8 @@
                     <span class="text-[33px] font-bold">
                         {{ $totalKurir }}
                     </span>
-                    <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
-                        <i class='bx bx-user text-3xl text-[#879FFF]'></i>
+                    <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#4A90E2]/10">
+                        <i class='bx bx-user text-3xl text-[#4A90E2]'></i>
                     </div>
                 </div>
             </div>
@@ -56,8 +56,8 @@
                     <span class="text-[33px] font-bold">
                         {{ $totalPIC }}
                     </span>
-                    <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#879FFF]/10">
-                        <i class='bx bx-user-check text-3xl text-[#879FFF]'></i>
+                    <div class="flex h-[64px] w-[64px] items-center justify-center rounded-xl bg-[#4A90E2]/10">
+                        <i class='bx bx-user-check text-3xl text-[#4A90E2]'></i>
                     </div>
                 </div>
             </div>

@@ -58,9 +58,16 @@
     <section class="flex w-full pt-10">
         <div class="flex flex-col w-full">
             <div class="w-full ">
-                <div class="mb-6 flex justify-between items-start flex-shrink-0">
-                    <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Data Pengiriman <span class="font-bold">{{$daerah->nama}}</span></h1>
+                <div class="flex items-start gap-7 mb-8">
+                    {{-- tombol kembali --}}
+                    <a href="{{ url()->previous() }}"
+                        class="inline-flex items-center px-3 py-2 rounded-lg bg-[#4A90E2] hover:bg-[#357ABD] text-white text-base font-semibold shadow transition-colors mb-4"
+                        title="Kembali">
+                        <i class="bx bx-arrow-back text-xl mr-1"></i>
+                    </a>
+                    <div class="flex flex-col">
+                        <h1 class="text-3xl font-bold text-gray-900">Data Pengiriman <span
+                                class="font-bold">{{ $daerah->nama }}</span></h1>
                         <p class="mt-1 text-base text-gray-500">Kelola data pengiriman</p>
                     </div>
                 </div>
@@ -81,43 +88,50 @@
                             </thead>
                             <tbody>
                                 @forelse($pengiriman ?? [] as $i => $order)
-                                <tr>
-                                    <td style="text-align: center">{{ $i + 1 }}</td>
-                                    <td class="font-mono text-blue-600" style="text-align: center">{{ $order->AWB ?? '-' }}</td>
-                                    <td style="text-align: center">{{ $order->user->nama ?? '-' }}</td> <!-- Nama Kurir -->
-                                    <td style="text-align: center">{{ $order->penerima ?? '-' }}</td>   <!-- Nama Penerima -->
-                                    <td style="text-align: center">{{ $order->tujuan ?? '-' }}</td>
-                                    <td style="text-align: center">{{ $order->tanggal ?? '-' }}</td>
-                                    <td style="text-align: center">
-                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
+                                    <tr>
+                                        <td style="text-align: center">{{ $i + 1 }}</td>
+                                        <td class="font-mono text-blue-600" style="text-align: center">
+                                            {{ $order->AWB ?? '-' }}</td>
+                                        <td style="text-align: center">{{ $order->user->nama ?? '-' }}</td>
+                                        <!-- Nama Kurir -->
+                                        <td style="text-align: center">{{ $order->penerima ?? '-' }}</td>
+                                        <!-- Nama Penerima -->
+                                        <td style="text-align: center">{{ $order->tujuan ?? '-' }}</td>
+                                        <td style="text-align: center">{{ $order->tanggal ?? '-' }}</td>
+                                        <td style="text-align: center">
+                                            <span
+                                                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
                                             {{ $order->status == 'Terkirim' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                                            <div class="w-1.5 h-1.5 {{ $order->status == 'Terkirim' ? 'bg-green-500' : 'bg-yellow-500' }} rounded-full mr-1"></div>
-                                            {{ $order->status ?? '-' }}
-                                        </span>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="flex justify-center gap-2">
-                                            @if(!empty($order->AWB))
-                                                <a href="{{ route('dashboard.data-pengiriman.show', $order->AWB) }}"
-                                                    class="inline-flex items-center justify-center rounded bg-blue-400 hover:bg-blue-400 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
-                                                    title="Lihat Detail">
-                                                    <i class="bx bx-show text-white text-lg"></i>
-                                                </a>
-                                                <button type="button" onclick="openDeleteModal('{{ $order->AWB }}')"
-                                                    class="focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center p-2 bg-red-500 hover:bg-red-600 focus:outline-none rounded transition-colors"
-                                                    title="Hapus">
-                                                    <i class="bx bx-trash-alt text-white text-lg"></i>
-                                                </button>
-                                            @else
-                                                <span class="text-gray-400">-</span>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
+                                                <div
+                                                    class="w-1.5 h-1.5 {{ $order->status == 'Terkirim' ? 'bg-green-500' : 'bg-yellow-500' }} rounded-full mr-1">
+                                                </div>
+                                                {{ $order->status ?? '-' }}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="flex justify-center gap-2">
+                                                @if (!empty($order->AWB))
+                                                    <a href="{{ route('dashboard.data-pengiriman.show', $order->AWB) }}"
+                                                        class="inline-flex items-center justify-center rounded bg-blue-400 hover:bg-blue-400 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
+                                                        title="Lihat Detail">
+                                                        <i class="bx bx-show text-white text-lg"></i>
+                                                    </a>
+                                                    <button type="button" onclick="openDeleteModal('{{ $order->AWB }}')"
+                                                        class="focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center p-2 bg-red-500 hover:bg-red-600 focus:outline-none rounded transition-colors"
+                                                        title="Hapus">
+                                                        <i class="bx bx-trash-alt text-white text-lg"></i>
+                                                    </button>
+                                                @else
+                                                    <span class="text-gray-400">-</span>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @empty
-                                <tr>
-                                    <td colspan="8" class="text-center text-gray-500">Tidak ada data pengiriman untuk daerah ini.</td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="8" class="text-center text-gray-500">Tidak ada data pengiriman untuk
+                                            daerah ini.</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
