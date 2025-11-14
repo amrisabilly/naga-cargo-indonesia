@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="bg-white py-6 px-8 rounded-lg shadow-sm">
-                    <form id="formPIC" action="{{ route('dashboard.data-kurir.store') }}" method="POST">
+                    <form id="formPIC" action="{{ route('dashboard.data-pic.store') }}" method="POST">
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Nama Lengkap -->
