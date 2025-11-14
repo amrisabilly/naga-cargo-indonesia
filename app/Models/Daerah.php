@@ -10,11 +10,10 @@ class Daerah extends Model
     use HasFactory;
 
     protected $table = 'daerah';
+    protected $primaryKey = 'id_daerah';
 
     protected $fillable = [
-        'kode',
+        'kode_daerah',
         'nama',
-        'latitude',
-        'longitude',
     ];
 }
