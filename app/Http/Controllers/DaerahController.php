@@ -30,7 +30,7 @@ class DaerahController extends Controller
 
         Daerah::create([
             'kode_daerah' => $request->kode_daerah,
-            'nama' => $request->nama,
+            'nama' => ucwords(strtolower($request->nama)),
         ]);
 
         return redirect()->route('dashboard.daerah')->with('success', 'Daerah berhasil ditambahkan.');
@@ -50,7 +50,7 @@ class DaerahController extends Controller
         $daerah = Daerah::findOrFail($id_daerah);
         $daerah->update([
             'kode_daerah' => $request->kode_daerah,
-            'nama' => $request->nama,
+            'nama' => ucwords(strtolower($request->nama)),
         ]);
 
         return redirect()->route('dashboard.daerah')->with('success', 'Daerah berhasil diupdate.');
