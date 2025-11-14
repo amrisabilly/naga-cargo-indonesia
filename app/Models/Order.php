@@ -17,6 +17,7 @@ class Order extends Model
 
     protected $fillable = [
         'AWB',
+        'id_PIC',
         'id_user',
         'id_daerah',
         'tujuan',
@@ -28,11 +29,15 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id_user');
+        return $this->belongsTo(User::class, 'id_user', 'id_user',);
     }
 
     public function daerah()
     {
         return $this->belongsTo(Daerah::class, 'id_daerah', 'id_daerah');
+    }
+    public function pic()
+    {
+        return $this->belongsTo(User::class, 'id_PIC', 'id_user');
     }
 }
