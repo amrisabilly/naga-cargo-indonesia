@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AdminSeeder::class,
             OrderSeeder::class,
-            OrderFotoSeeder::class,
+            //OrderFotoSeeder::class,
         ]);
     }
 }

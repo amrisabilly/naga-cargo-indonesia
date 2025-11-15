@@ -72,7 +72,7 @@ class PicController extends Controller
         ]);
 
         $orders = Order::where('id_PIC', $request->id_pic)
-            ->orderByAsc('created_at')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         return response()->json(['orders' => $orders]);
