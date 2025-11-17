@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Daerah;
 use App\Models\Order;
 use App\Models\OrderFoto;
 use App\Models\User;
@@ -28,9 +29,17 @@ class KurirController extends Controller
             return response()->json(['message' => 'Login gagal'], 401);
         }
 
+        // Ambil nama daerah dari relasi
+        $nama_daerah = null;
+        if ($kurir->id_daerah) {
+            $daerah = Daerah::find($kurir->id_daerah);
+            $nama_daerah = $daerah ? $daerah->nama : "Daerah Tidak Ditemukan";
+        }
+
         return response()->json([
             'message' => 'Login berhasil',
-            'user' => $kurir
+            'user' => $kurir,
+            'nama_daerah' => $nama_daerah
         ]);
     }
 
