@@ -115,7 +115,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pic->no_hp) }}?text={{ urlencode('Halo ' . $pic->nama . ', saya ingin menghubungi Anda terkait akun PIC.') }}"
+                                            <a href="https://wa.me/{{ preg_replace('/^08/', '628', preg_replace('/[^0-9]/', '', $pic->no_hp)) }}"
                                                 target="_blank"
                                                 class="text-[#25D366] hover:underline font-semibold flex items-center gap-1"
                                                 title="Chat WhatsApp">

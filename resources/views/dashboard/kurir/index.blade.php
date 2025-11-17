@@ -96,8 +96,7 @@
                                         <td style="text-align: left">{{ $kurir->nama }}</td>
                                         <td style="text-align: left">
                                             <div class="credential-item">
-                                                <span
-                                                    class="credential-text">{{ $kurir->username }}</span>
+                                                <span class="credential-text">{{ $kurir->username }}</span>
                                                 <button class="copy-btn p-1 rounded text-gray-500"
                                                     onclick="copyToClipboard('{{ $kurir->username }}', this)"
                                                     title="Salin Username">
@@ -116,7 +115,7 @@
                                             </div>
                                         </td>
                                         <td style="text-align: left">
-                                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $kurir->no_hp) }}?text={{ urlencode('Halo ' . $kurir->nama . ', saya ingin menghubungi Anda terkait akun kurir.') }}"
+                                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $kurir->no_hp) }}"
                                                 target="_blank"
                                                 class="text-[#25D366] hover:underline font-semibold flex items-center gap-1"
                                                 title="Chat WhatsApp">
