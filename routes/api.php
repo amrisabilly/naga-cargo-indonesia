@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\KurirController;
 use App\Http\Controllers\Api\PicController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,13 @@ Route::prefix('PIC')->group(function () {
     Route::post('/order', [PicController::class, 'storeOrder']);
     Route::get('/riwayat-order', [PicController::class, 'riwayatOrder']);
 });
-route::prefix('KURIR')->group(function () {
-    // Tambahkan route untuk KURIR di sini
+
+Route::prefix('KURIR')->group(function () {
+    Route::post('/login', [KurirController::class, 'login']);
+    Route::get('/order-by-daerah', [KurirController::class, 'getOrderByDaerah']); // Baru
+    Route::post('/search-order', [KurirController::class, 'searchOrder']);
+    Route::post('/update-order', [KurirController::class, 'updateOrder']);
+    Route::post('/upload-foto', [KurirController::class, 'uploadFoto']);
+    Route::get('/riwayat-order', [KurirController::class, 'riwayatOrder']);
+    Route::get('/detail-order/{AWB}', [KurirController::class, 'detailOrder']);
 });
