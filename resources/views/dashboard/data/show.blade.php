@@ -9,7 +9,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            height: 400px;
+            height: 440px;
         }
 
         .main-image {
