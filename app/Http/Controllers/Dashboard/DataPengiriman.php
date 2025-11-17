@@ -27,18 +27,11 @@ class DataPengiriman extends Controller
     {
         $order = Order::with('user')->where('AWB', $AWB)->firstOrFail();
 
-        // Ambil fotos dan tambahkan full URL
-        $fotos = OrderFoto::where('AWB', $AWB)->get()->map(function ($foto) {
-            return [
-                'id_foto' => $foto->id_foto,
-                'AWB' => $foto->AWB,
-                'path_foto' => $foto->path_foto,
-                'url' => asset('storage/' . $foto->path_foto), // Full URL
-                'keterangan' => $foto->keterangan,
-                'created_at' => $foto->created_at,
-                'updated_at' => $foto->updated_at,
-            ];
-        });
+        // Ambil fotos dan tambahkan property url (tetap object)
+        $fotos = OrderFoto::where('AWB', $AWB)->get();
+        foreach ($fotos as $foto) {
+            $foto->url = asset('storage/' . $foto->path_foto);
+        }
 
         return view('dashboard.data.show', compact('order', 'fotos'));
     }
