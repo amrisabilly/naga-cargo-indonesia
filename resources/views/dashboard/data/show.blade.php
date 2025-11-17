@@ -362,7 +362,8 @@
                     <div class="gallery-container">
                         {{-- Main Image --}}
                         <div class="main-image" onclick="openModal(0)">
-                            <img id="mainImage" src="{{ $fotos->first()->path_foto ?? 'https://picsum.photos/150/150' }}"
+                            <img id="mainImage"
+                                src="{{ asset('storage/' . $fotos->first()->path_foto) ?? 'https://picsum.photos/150/150' }}"
                                 alt="Main Photo" loading="lazy">
                             <div class="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
                                 <i class="bx bx-camera mr-1"></i>
@@ -428,7 +429,7 @@
         const images = [
             @foreach ($fotos as $foto)
                 {
-                    url: '{{ $foto->path_foto }}',
+                    url: '{{ asset('storage/' . $foto->path_foto) }}',
                     description: '{{ $foto->keterangan ?? 'Tidak ada keterangan' }}'
                 }
                 @if (!$loop->last)
