@@ -23,11 +23,12 @@
             </a>
         </li>
         <!-- Data Pengiriman -->
-        <li class="{{ Request::is('dashboard/daerah*') ? 'bg-[#4A90E2] rounded-xl' : '' }} mt-1 rounded-lg p-2">
+        <li
+            class="{{ Request::is('dashboard/daerah*') || Request::is('dashboard/data-pengiriman*') ? 'bg-[#4A90E2] rounded-xl' : '' }} mt-1 rounded-lg p-2">
             <a href="{{ route('dashboard.daerah') }}"
-                class="group flex flex-row items-center duration-700 {{ Request::is('dashboard/daerah*') ? 'text-white' : 'text-gray-700 hover:text-[#4A90E2]' }}">
+                class="group flex flex-row items-center duration-700 {{ Request::is('dashboard/daerah*') || Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700 hover:text-[#4A90E2]' }}">
                 <i
-                    class="bx bx-package {{ Request::is('dashboard/daerah*') ? 'text-white' : 'text-gray-700 group-hover:text-[#4A90E2]' }} text-xl transition-colors duration-300"></i>
+                    class="bx bx-package {{ Request::is('dashboard/daerah*') || Request::is('dashboard/data-pengiriman*') ? 'text-white' : 'text-gray-700 group-hover:text-[#4A90E2]' }} text-xl transition-colors duration-300"></i>
                 <span class="ml-2 text-base font-bold leading-5 menu-text">Pengiriman</span>
             </a>
         </li>

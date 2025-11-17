@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Daerah;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class DaerahController extends Controller
@@ -14,7 +15,10 @@ class DaerahController extends Controller
     {
         // Menampilkan halaman data daerah pengiriman
         $daerah = Daerah::all();
-        return view('dashboard.data.index', compact('daerah'));
+        $pengirimanCount = Order::selectRaw('id_daerah, COUNT(*) as total')
+            ->groupBy('id_daerah')
+            ->pluck('total', 'id_daerah');
+        return view('dashboard.data.index', compact('daerah', 'pengirimanCount'));
     }
 
 

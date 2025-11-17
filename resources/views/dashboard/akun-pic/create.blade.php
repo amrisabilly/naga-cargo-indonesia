@@ -11,7 +11,7 @@
             <div class="w-full">
                 <div class="flex items-start gap-7 mb-8">
                     {{-- Tombol kembali --}}
-                    <a href="{{ url()->previous() }}"
+                    <a href="{{ route('dashboard.data-pic.index') }}"
                         class="inline-flex items-center px-3 py-2 rounded-lg bg-[#4A90E2] hover:bg-[#357ABD] text-white text-base font-semibold shadow transition-colors"
                         title="Kembali">
                         <i class="bx bx-arrow-back text-xl mr-1"></i>
@@ -33,9 +33,6 @@
                                 <input type="text" id="nama" name="nama" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan nama lengkap PIC">
-                                @error('nama')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
 
                             <!-- Username -->
@@ -46,9 +43,6 @@
                                 <input type="text" id="username" name="username" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan username">
-                                @error('username')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
 
                             <!-- Password -->
@@ -65,9 +59,6 @@
                                         <i id="passwordIcon" class="bx bx-hide text-gray-400 text-xl"></i>
                                     </button>
                                 </div>
-                                @error('password')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
 
                             <!-- No. Telepon -->
@@ -78,9 +69,6 @@
                                 <input type="tel" id="no_hp" name="no_hp" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:border-transparent text-base"
                                     placeholder="Masukkan nomor telepon">
-                                @error('no_hp')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
 
                             <!-- Daerah dengan Search -->
@@ -100,9 +88,6 @@
                                         <!-- Options akan diisi via JavaScript -->
                                     </ul>
                                 </div>
-                                @error('id_daerah')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
 
                             <!-- Status -->
@@ -122,9 +107,6 @@
                                         <span class="ml-2 text-base text-gray-700">Nonaktif</span>
                                     </label>
                                 </div>
-                                @error('status')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
                             </div>
                         </div>
 
@@ -133,13 +115,13 @@
 
                         <!-- Tombol Action -->
                         <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200">
-                            <a href=""
+                            <a href="{{ route('dashboard.data-pic.index') }}"
                                 class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200 text-base font-medium">
                                 <i class="bx bx-x mr-2"></i>
                                 Batal
                             </a>
                             <button type="submit"
-                                class="px-6 py-3 bg-[#879FFF] text-white rounded-lg hover:bg-[#6B7EF7] focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2 transition-colors duration-200 text-base font-medium">
+                                class="px-6 py-3 bg-[#4A90E2] text-white rounded-lg hover:bg-[#316caf] focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2 transition-colors duration-200 text-base font-medium">
                                 <i class="bx bx-check mr-2"></i>
                                 Kirim
                             </button>
@@ -152,6 +134,7 @@
 @endsection
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const daftarDaerah = @json($daerah);
 
@@ -217,5 +200,58 @@
 
         // Render initial list
         renderDaerahList();
+
+        // Tampilkan error validasi backend (Laravel) dalam bentuk Swal toast
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                @if (Str::contains($error, 'username'))
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Username sudah digunakan, silakan pilih username lain!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                @else
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: @json($error),
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                @endif
+            @endforeach
+        @endif
+
+        // Validasi nomor HP saat submit
+        document.getElementById('formPIC').addEventListener('submit', function(e) {
+            const noHpInput = document.getElementById('no_hp');
+            const noHp = noHpInput.value.trim();
+            // Valid: diawali 08, hanya angka, panjang 10-13 digit
+            const hpRegex = /^08[0-9]{8,11}$/;
+
+            if (!hpRegex.test(noHp)) {
+                e.preventDefault();
+                noHpInput.classList.add('border-red-500');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Nomor HP harus diawali 08 dan 10-13 digit angka!',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+                noHpInput.focus();
+                return false;
+            } else {
+                noHpInput.classList.remove('border-red-500');
+            }
+        });
     </script>
 @endsection

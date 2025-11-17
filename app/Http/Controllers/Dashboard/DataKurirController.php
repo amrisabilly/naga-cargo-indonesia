@@ -15,7 +15,7 @@ class DataKurirController extends Controller
      */
     public function index()
     {
-        $kurirs = User::with('daerah')->get();
+        $kurirs = User::with('daerah')->where('role', 'Kurir')->get();
         return view('dashboard.kurir.index', compact('kurirs'));
     }
 
@@ -61,7 +61,7 @@ class DataKurirController extends Controller
     public function edit($id_user)
     {
         // fetch data kurir dan daerah
-        $kurir = User::where('id_user', $id_user)->first();
+        $kurir = User::where('id_user', $id_user)->where('role', 'Kurir')->first();
         $daerah = Daerah::get();
         return view('dashboard.kurir.edit', compact('kurir', 'daerah'));
     }
@@ -73,7 +73,7 @@ class DataKurirController extends Controller
     {
         // dd($request, $id_user);
 
-        $kurir = User::where('id_user', $id_user)->first();
+        $kurir = User::where('id_user', $id_user)->where('role', 'Kurir')->first();
 
         $request->validate([
             'nama' => 'required|string|max:255',
@@ -111,7 +111,7 @@ class DataKurirController extends Controller
      */
     public function destroy($id_user)
     {
-        $kurir = User::where('id_user', $id_user)->firstOrFail();
+        $kurir = User::where('id_user', $id_user)->where('role', 'Kurir')->firstOrFail();
         $kurir->delete();
 
         return redirect()->route('dashboard.data-kurir.index')->with('success', 'Kurir berhasil dihapus.');

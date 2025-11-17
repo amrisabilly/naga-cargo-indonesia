@@ -60,7 +60,7 @@
             <div class="w-full ">
                 <div class="flex items-start gap-7 mb-8">
                     {{-- tombol kembali --}}
-                    <a href="{{ url()->previous() }}"
+                    <a href="{{ route('dashboard.data-daerah.index') }}"
                         class="inline-flex items-center px-3 py-2 rounded-lg bg-[#4A90E2] hover:bg-[#357ABD] text-white text-base font-semibold shadow transition-colors mb-4"
                         title="Kembali">
                         <i class="bx bx-arrow-back text-xl mr-1"></i>
@@ -185,6 +185,7 @@
 
         function closeDeleteModal() {
             deleteModal.classList.add('hidden');
+
         }
     </script>
 @endsection

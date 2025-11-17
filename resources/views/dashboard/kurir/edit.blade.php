@@ -120,13 +120,13 @@
                                     <label class="inline-flex items-center">
                                         <input type="radio" name="status" value="Aktif"
                                             {{ $kurir->status == 'Aktif' ? 'checked' : '' }}
-                                            class="form-radio h-5 w-5 text-[#879FFF] focus:ring-[#879FFF] border-gray-300">
+                                            class="form-radio h-5 w-5 text-[#4A90E2] focus:ring-[#4A90E2] border-gray-300">
                                         <span class="ml-2 text-base text-gray-700">Aktif</span>
                                     </label>
                                     <label class="inline-flex items-center">
                                         <input type="radio" name="status" value="Nonaktif"
                                             {{ $kurir->status == 'Nonaktif' ? 'checked' : '' }}
-                                            class="form-radio h-5 w-5 text-[#879FFF] focus:ring-[#879FFF] border-gray-300">
+                                            class="form-radio h-5 w-5 text-[#4A90E2] focus:ring-[#4A90E2] border-gray-300">
                                         <span class="ml-2 text-base text-gray-700">Nonaktif</span>
                                     </label>
                                 </div>
@@ -141,13 +141,13 @@
 
                         <!-- Tombol Action -->
                         <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200">
-                            <a href=""
+                            <a href="{{ route('dashboard.data-kurir.index') }}"
                                 class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200 text-base font-medium">
                                 <i class="bx bx-x mr-2"></i>
                                 Batal
                             </a>
                             <button type="submit"
-                                class="px-6 py-3 bg-[#879FFF] text-white rounded-lg hover:bg-[#6B7EF7] focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2 transition-colors duration-200 text-base font-medium">
+                                class="px-6 py-3 bg-[#4A90E2] text-white rounded-lg hover:bg-[#5667d4] focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2 transition-colors duration-200 text-base font-medium">
                                 <i class="bx bx-save mr-2"></i>
                                 Update
                             </button>
@@ -160,7 +160,35 @@
 @endsection
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // Tampilkan error validasi backend (Laravel) dalam bentuk Swal toast
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                @if (strpos($error, 'username') !== false)
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Username sudah digunakan, silakan pilih username lain!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                @else
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: @json($error),
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                @endif
+            @endforeach
+        @endif
+
         // Data daerah dari controller (ganti array hardcode dengan data dinamis jika sudah siap)
         const daftarDaerah = @json($daerah);
 
@@ -308,15 +336,43 @@
             });
 
             // Validasi khusus untuk daerah
+            const idDaerahHidden = document.getElementById('id_daerah');
+            const daerahSearch = document.getElementById('daerah_search');
             if (!idDaerahHidden.value) {
                 isValid = false;
                 daerahSearch.classList.add('border-red-500');
                 daerahSearch.focus();
             }
 
+            // Validasi nomor HP harus diawali 08 dan hanya angka (10-13 digit)
+            const noHp = document.getElementById('no_hp').value.trim();
+            const hpRegex = /^08[0-9]{8,11}$/;
+            if (!hpRegex.test(noHp)) {
+                isValid = false;
+                document.getElementById('no_hp').classList.add('border-red-500');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Nomor HP harus diawali 08 dan 10-13 digit angka!',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true
+                });
+                document.getElementById('no_hp').focus();
+            }
+
             if (!isValid) {
                 e.preventDefault();
-                alert('Mohon lengkapi semua field yang wajib diisi!');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Mohon lengkapi semua field yang wajib diisi!',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true
+                });
             }
         });
 

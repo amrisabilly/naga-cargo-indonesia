@@ -113,9 +113,16 @@
                                         <td style="text-align: left">{{ $item['nama'] }}</td>
                                         <td style="text-align: center">{{ $item['kode_daerah'] }}</td>
                                         <td style="text-align: center">
-                                            <a href="{{ route('dashboard.data-pengiriman.daerah', $item['id_daerah']) }}"
-                                                class="inline-flex items-center justify-center bg-[#4A90E2] hover:bg-[#357ABD] text-white rounded-lg px-3 py-2 transition-colors"
-                                                title="Lihat Detail Pengiriman">
+                                            @php
+                                                $hasPengiriman =
+                                                    isset($pengirimanCount[$item['id_daerah']]) &&
+                                                    $pengirimanCount[$item['id_daerah']] > 0;
+                                            @endphp
+                                            <a href="{{ $hasPengiriman ? route('dashboard.data-pengiriman.daerah', $item['id_daerah']) : '#' }}"
+                                                class="inline-flex items-center justify-center rounded-lg px-3 py-2 transition-colors
+                                                {{ $hasPengiriman ? 'bg-[#4A90E2] hover:bg-[#357ABD] text-white cursor-pointer' : 'bg-gray-300 text-gray-400 cursor-not-allowed' }}"
+                                                title="{{ $hasPengiriman ? 'Lihat Detail Pengiriman' : 'Belum ada data pengiriman' }}"
+                                                {{ $hasPengiriman ? '' : 'tabindex="-1" aria-disabled="true" onclick="return false;"' }}>
                                                 <i class="bx bx-map-pin text-lg mr-1"></i>
                                                 Detail Pengiriman
                                             </a>
@@ -176,19 +183,20 @@
                         <!-- End Modal -->
 
                         <!-- Modal Edit Daerah -->
-                        <div id="editModal" class="fixed inset-0 z-10 hidden items-center justify-center bg-black bg-opacity-50 flex">
+                        <div id="editModal"
+                            class="fixed inset-0 z-10 hidden items-center justify-center bg-black bg-opacity-50 flex">
                             <div class="w-full max-w-md rounded-lg bg-white p-6 text-center">
                                 <h3 class="mb-4 text-lg font-medium text-gray-900">Edit Daerah</h3>
                                 <form id="editForm" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="mb-4">
-                                        <input type="text" name="kode_daerah" id="editKodeDaerah" class="w-full border rounded px-3 py-2"
-                                            required>
+                                        <input type="text" name="kode_daerah" id="editKodeDaerah"
+                                            class="w-full border rounded px-3 py-2" required>
                                     </div>
                                     <div class="mb-4">
-                                        <input type="text" name="nama" id="editNama" class="w-full border rounded px-3 py-2"
-                                            required>
+                                        <input type="text" name="nama" id="editNama"
+                                            class="w-full border rounded px-3 py-2" required>
                                     </div>
                                     <div class="flex gap-4">
                                         <button type="submit"
@@ -215,6 +223,7 @@
         function openCreateModal() {
             document.getElementById('createModal').classList.remove('hidden');
         }
+
         function closeCreateModal() {
             document.getElementById('createModal').classList.add('hidden');
         }
@@ -226,6 +235,7 @@
             document.getElementById('editNama').value = nama;
             document.getElementById('editForm').action = "/dashboard/data-daerah/" + id;
         }
+
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');
         }
@@ -234,17 +244,19 @@
         let deleteModal = document.getElementById('deleteModal');
         let deleteForm = document.getElementById('deleteForm');
         let deleteModalText = document.getElementById('deleteModalText');
+
         function openDeleteModal(idDaerah, namaDaerah) {
             deleteForm.action = "/dashboard/data-daerah/" + idDaerah;
             deleteModalText.innerHTML = "Apakah Anda yakin ingin menghapus daerah <b>" + namaDaerah + "</b>?";
             deleteModal.classList.remove('hidden');
         }
+
         function closeDeleteModal() {
             deleteModal.classList.add('hidden');
         }
 
         // Swal Toast Success/Error
-        @if(session('success'))
+        @if (session('success'))
             Swal.fire({
                 toast: true,
                 position: 'top-end',
@@ -256,7 +268,7 @@
             });
         @endif
 
-        @if($errors->any())
+        @if ($errors->any())
             Swal.fire({
                 toast: true,
                 position: 'top-end',
