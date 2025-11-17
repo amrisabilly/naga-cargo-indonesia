@@ -113,9 +113,9 @@ class KurirController extends Controller
             foreach ($request->file('fotos') as $index => $file) {
                 // Nama file dengan format: AWB_nomor_timestamp.ext
                 $filename = $request->AWB . '_' . ($index + 1) . '_' . time() . '.' . $file->getClientOriginalExtension();
-                
+
                 // Store ke folder public/storage/order-fotos
-                $path = $file->storeAs('order-fotos', $filename, 'public');
+                $path = $file->storeAs('', $filename, 'public');
 
                 // Simpan data foto ke database
                 $foto = OrderFoto::create([
