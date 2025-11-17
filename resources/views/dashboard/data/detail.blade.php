@@ -136,6 +136,45 @@
                             </tbody>
                         </table>
 
+                        {{-- Main Image --}}
+                        <div class="main-image">
+                            <img id="mainPhoto" src="{{ asset('storage/' . $order->orderFoto->first()->path_foto) }}"
+                                alt="Main Photo">
+                        </div>
+
+                        {{-- Thumbnail Grid --}}
+                        <div class="thumbnail-grid">
+                            @foreach ($order->orderFoto as $foto)
+                                <div class="thumbnail {{ $loop->first ? 'active' : '' }}"
+                                    onclick="changeMainImage({{ $loop->index }}, this)">
+                                    <img src="{{ asset('storage/' . $foto->path_foto) }}"
+                                        alt="Photo {{ $loop->iteration }}" loading="lazy">
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <script>
+                            // Data gambar
+                            const images = @json(
+                                $order->orderFoto->map(function ($foto) {
+                                    return [
+                                        'url' => asset('storage/' . $foto->path_foto),
+                                        'keterangan' => $foto->keterangan,
+                                    ];
+                                }));
+
+                            function changeMainImage(index, element) {
+                                // Update main image
+                                document.getElementById('mainPhoto').src = images[index].url;
+
+                                // Update active thumbnail
+                                document.querySelectorAll('.thumbnail').forEach(thumb => {
+                                    thumb.classList.remove('active');
+                                });
+                                element.classList.add('active');
+                            }
+                        </script>
+
                         <!-- Modal Konfirmasi Hapus -->
                         <div id="deleteModal"
                             class="fixed inset-0 z-10 hidden items-center justify-center bg-black bg-opacity-50 flex">
