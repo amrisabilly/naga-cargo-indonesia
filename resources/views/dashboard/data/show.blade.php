@@ -375,7 +375,8 @@
                             @foreach ($fotos as $i => $foto)
                                 <div class="thumbnail{{ $i == 0 ? ' active' : '' }}"
                                     onclick="changeMainImage({{ $i }}, this)">
-                                    <img src="{{ $foto->path_foto }}" alt="Photo {{ $i + 1 }}" loading="lazy">
+                                    <img src="{{ asset('storage/' . $foto->path_foto) }}" alt="Photo {{ $i + 1 }}"
+                                        loading="lazy">
                                     @if ($i == 6 && $fotos->count() > 7)
                                         <div class="thumbnail-count">+{{ $fotos->count() - 6 }} Foto</div>
                                     @endif
