@@ -114,17 +114,22 @@ class KurirController extends Controller
                 // Nama file dengan format: AWB_nomor_timestamp.ext
                 $filename = $request->AWB . '_' . ($index + 1) . '_' . time() . '.' . $file->getClientOriginalExtension();
 
-                // Store ke folder public/storage/order-fotos
-                $path = $file->storeAs('', $filename, 'public');
+                // Store langsung ke folder public (storage/app/public)
+                $file->storeAs('', $filename, 'public');
 
-                // Simpan data foto ke database
+                // Simpan data foto ke database (hanya nama file)
                 $foto = OrderFoto::create([
                     'AWB' => $request->AWB,
-                    'path_foto' => $path, // Hanya simpan: order-fotos/test123_1_1700000000.jpg
+                    'path_foto' => $filename, // Simpan hanya nama file: test123_1_1700000000.jpg
                     'keterangan' => $request->keterangan[$index] ?? null,
                 ]);
 
-                $uploadedFotos[] = $foto;
+                $uploadedFotos[] = [
+                    'id' => $foto->id_foto,
+                    'path_foto' => $foto->path_foto,
+                    'url' => asset('storage/' . $foto->path_foto), // URL lengkap
+                    'keterangan' => $foto->keterangan,
+                ];
             }
         }
 
