@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\KurirController;
+use App\Http\Controllers\Api\KurirController;
 use App\Http\Controllers\Api\PicController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
