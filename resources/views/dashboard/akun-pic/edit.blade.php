@@ -171,9 +171,10 @@
                     li.textContent = daerah.nama;
                 }
 
-                li.onclick = function() {
+                // Gunakan onmousedown agar tidak bentrok dengan blur
+                li.onmousedown = function() {
                     daerahSearch.value = daerah.nama;
-                    idDaerahHidden.value = daerah.id;
+                    idDaerahHidden.value = daerah.id_daerah;
                     daerahDropdown.classList.add('hidden');
                     daerahSearch.classList.remove('border-red-500');
                 };
@@ -199,10 +200,7 @@
         // Event listeners untuk daerah search
         daerahSearch.addEventListener('input', function() {
             const keyword = this.value.trim();
-            // Jangan reset hidden value jika sedang edit dan nilai masih sama
-            if (this.value !== 'Bandung') {
-                idDaerahHidden.value = '';
-            }
+            idDaerahHidden.value = ''; // Reset hidden value saat mengetik
             filterDaerah(keyword);
             daerahDropdown.classList.remove('hidden');
         });
@@ -213,7 +211,6 @@
         });
 
         daerahSearch.addEventListener('blur', function() {
-            // Delay untuk memungkinkan klik pada dropdown
             setTimeout(() => {
                 daerahDropdown.classList.add('hidden');
             }, 150);
@@ -235,7 +232,7 @@
             } else if (e.key === 'Enter') {
                 e.preventDefault();
                 if (currentIndex >= 0 && items[currentIndex]) {
-                    items[currentIndex].click();
+                    items[currentIndex].dispatchEvent(new Event('mousedown'));
                     currentIndex = -1;
                 }
             } else if (e.key === 'Escape') {
