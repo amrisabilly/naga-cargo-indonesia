@@ -7,9 +7,9 @@ use App\Http\Controllers\Dashboard\DataPengiriman;
 use App\Http\Controllers\Dashboard\DataPicController;
 use App\Http\Controllers\Dashboard\DataKurirController;
 
-Route::get('/', [DataController::class, 'index'])->name('index');
 
-Route::prefix('dashboard')->name('dashboard.')->group(function(){
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('/', [DataController::class, 'index'])->name('index');
     Route::get('/daerah', [DaerahController::class, 'index'])->name('daerah');
     Route::resource('/data-daerah', DaerahController::class);
     Route::get('/data-pengiriman/daerah/{id_daerah}', [DataPengiriman::class, 'showByDaerah'])->name('data-pengiriman.daerah');

@@ -15,7 +15,7 @@
         <!-- Dashboard -->
         <li
             class="{{ Request::is('/') || Request::is('dashboard') ? 'bg-[#4A90E2] rounded-xl' : '' }} mt-1 rounded-lg px-3 py-2">
-            <a href="{{ route('index') }}"
+            <a href="{{ route('dashboard.index') }}"
                 class="group flex flex-row items-center duration-700 {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700 hover:text-[#4A90E2]' }}">
                 <i
                     class="bx bx-home-alt {{ Request::is('/') || Request::is('dashboard') ? 'text-white' : 'text-gray-700 group-hover:text-[#4A90E2]' }} text-xl transition-colors duration-300"></i>
@@ -53,7 +53,7 @@
         {{-- Daerah --}}
         <!-- Logout -->
         <li class="dark-hover:text-blue-300 mt-20 rounded-lg p-2">
-            <form action="" method="POST">
+            <form action="{{ route('auth.logout') }}" method="POST">
                 @csrf
                 <button type="submit" id="logoutBtn"
                     class="group fixed bottom-5 left-14 flex items-center gap-2 rounded-full bg-slate-100 px-6 py-2 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4A90E2] text-black">

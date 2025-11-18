@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 
 class AuthenticatedController extends Controller
@@ -23,13 +24,22 @@ class AuthenticatedController extends Controller
 
         $admin = Admin::where('username', $credentials['username'])->first();
 
-        if ($admin && $credentials['password'] === $admin->password) {
-            Auth::login($admin);
-            return redirect()->intended('/'); // Rute pengalihan setelah login berhasil
+        // Gunakan Hash::check untuk membandingkan password hash
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            Auth::guard('web')->login($admin);
+            return redirect()->route('dashboard.index');
         }
 
         return back()->withErrors([
             'username' => 'Login gagal. Periksa username dan password Anda.',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('auth.login');
     }
 }

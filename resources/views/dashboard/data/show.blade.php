@@ -312,7 +312,9 @@
                             </div>
                             <div class="info-row">
                                 <span class="info-label">Tanggal Kirim</span>
-                                <span class="info-value">{{ $date->user->no_hp ?? 'Data masih kosong' }}</span>
+                                <span class="info-value">
+                                    {{ $order->tanggal ? \Carbon\Carbon::parse($order->tanggal)->format('d-m-Y H:i') : 'Data masih kosong' }}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -362,30 +364,42 @@
                     <div class="gallery-container">
                         {{-- Main Image --}}
                         <div class="main-image" onclick="openModal(0)">
-                            <img id="mainImage"
-                                src="{{ asset('storage/' . $fotos->first()->path_foto) ?? 'https://picsum.photos/150/150' }}"
-                                alt="Main Photo" loading="lazy">
-                            <div class="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
-                                <i class="bx bx-camera mr-1"></i>
-                                <span id="imageCounter">1 / {{ $fotos->count() }}</span>
-                            </div>
+                            @if ($fotos->isNotEmpty())
+                                <img id="mainImage" src="{{ asset('storage/' . $fotos->first()->path_foto) }}"
+                                    alt="Main Photo" loading="lazy">
+                                <div
+                                    class="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
+                                    <i class="bx bx-camera mr-1"></i>
+                                    <span id="imageCounter">1 / {{ $fotos->count() }}</span>
+                                </div>
+                            @else
+                                <img id="mainImage" src="https://via.placeholder.com/600x400?text=Belum+Ada+Foto"
+                                    alt="Belum Ada Foto" loading="lazy">
+                                <div
+                                    class="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
+                                    <i class="bx bx-camera mr-1"></i>
+                                    <span id="imageCounter">0 / 0</span>
+                                </div>
+                            @endif
                         </div>
 
                         {{-- Thumbnail Grid --}}
                         <div class="thumbnail-grid">
-                            @foreach ($fotos as $i => $foto)
-                                <div class="thumbnail{{ $i == 0 ? ' active' : '' }}"
-                                    onclick="changeMainImage({{ $i }}, this)">
-                                    <img src="{{ asset('storage/' . $foto->path_foto) }}" alt="Photo {{ $i + 1 }}"
-                                        loading="lazy">
-                                    @if ($i == 6 && $fotos->count() > 7)
-                                        <div class="thumbnail-count">+{{ $fotos->count() - 6 }} Foto</div>
-                                    @endif
-                                </div>
-                            @endforeach
-                            @if ($fotos->isEmpty())
-                                <div class="thumbnail active">
-                                    <img src="https://picsum.photos/150/150" alt="No Photo" loading="lazy">
+                            @if ($fotos->isNotEmpty())
+                                @foreach ($fotos as $i => $foto)
+                                    <div class="thumbnail{{ $i == 0 ? ' active' : '' }}"
+                                        onclick="changeMainImage({{ $i }}, this)">
+                                        <img src="{{ asset('storage/' . $foto->path_foto) }}"
+                                            alt="Photo {{ $i + 1 }}" loading="lazy">
+                                        @if ($i == 6 && $fotos->count() > 7)
+                                            <div class="thumbnail-count">+{{ $fotos->count() - 6 }} Foto</div>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="thumbnail active flex items-center justify-center bg-gray-100 text-gray-400"
+                                    style="aspect-ratio:1;">
+                                    <span class="text-xs">Belum ada upload bukti foto</span>
                                 </div>
                             @endif
                         </div>
