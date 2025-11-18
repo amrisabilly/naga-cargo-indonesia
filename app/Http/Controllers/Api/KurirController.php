@@ -146,7 +146,6 @@ class KurirController extends Controller
         ]);
 
         $orders = Order::where('id_user', $request->id_kurir)
-            ->with('daerah', 'orderFoto') // Hapus 'pic'
             ->orderByDesc('created_at')
             ->get();
 
