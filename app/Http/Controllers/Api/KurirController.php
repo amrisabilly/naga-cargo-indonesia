@@ -53,8 +53,6 @@ class KurirController extends Controller
             'AWB' => 'required|string',
             'id_kurir' => 'required',
             'tanggal' => 'required',
-            'penerima' => 'required',
-            'no_hp' => 'required|string|max:20',
         ]);
 
         // Cek kurir
@@ -76,8 +74,6 @@ class KurirController extends Controller
         $order->update([
             'id_user' => $kurir->id_user,
             'tanggal' => $request->tanggal,
-            'penerima' => $request->penerima,
-            'no_hp' => $request->no_hp,
             'status' => 'Terkirim',
         ]);
 
