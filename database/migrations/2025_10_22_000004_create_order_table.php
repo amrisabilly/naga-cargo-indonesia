@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('id_user')->nullable()->constrained('users', 'id_user')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('id_daerah')->nullable()->constrained('daerah', 'id_daerah')->cascadeOnUpdate()->nullOnDelete();
             $table->string('tujuan', 255)->nullable()->default(null);
-            $table->string('penerima', 50)->nullable()->default(null);
+            $table->string('penerima', 255)->nullable()->default(null);
             $table->string('no_hp', 255)->nullable()->default(null);
             $table->date('tanggal')->nullable()->default(null);
             $table->enum('status', ['Proses', 'Gagal', 'Terkirim'])->default('Proses');

@@ -45,7 +45,9 @@ class PicController extends Controller
         $request->validate([
             'AWB' => 'required|string|unique:order,AWB',
             'id_pic' => 'required|exists:users,id_user',  // id PIC
-            'tujuan' => 'required|string|max:70',
+            'tujuan' => 'required|string|max:255',
+            'Penerima' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
         ]);
 
         $pic = User::where('id_user', $request->id_pic)->where('role', 'PIC')->first();
@@ -58,6 +60,8 @@ class PicController extends Controller
             'id_PIC' => $pic->id_user,
             'id_daerah' => $pic->id_daerah,
             'tujuan' => $request->tujuan,
+            'penerima' => $request->Penerima,
+            'no_hp' => $request->no_hp,
             'status' => 'Proses',
         ]);
 
