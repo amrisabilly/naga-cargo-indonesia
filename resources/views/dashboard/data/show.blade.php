@@ -310,7 +310,7 @@
                                 <span class="info-label">Telepon</span>
                                 <span class="info-value">
                                     @if ($order->user && $order->user->no_hp)
-                                        <a href="https://wa.me/{{ preg_replace('/^08/', '628', preg_replace('/[^0-9]/', '', $order->kurir->no_hp)) }}"
+                                        <a href="https://wa.me/{{ preg_replace('/^08/', '628', preg_replace('/[^0-9]/', '', $order->user->no_hp)) }}"
                                             target="_blank"
                                             class="text-[#25D366] hover:underline font-semibold flex items-center gap-1"
                                             title="Chat WhatsApp">
