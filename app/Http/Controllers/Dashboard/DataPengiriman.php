@@ -17,7 +17,11 @@ class DataPengiriman extends Controller
         $daerah = Daerah::where('id_daerah', $id_daerah)->firstOrFail();
 
         // Eager load relasi user (kurir)
-        $pengiriman = Order::with('user')->where('id_daerah', $id_daerah)->get();
+        // Urutkan berdasarkan perubahan terbaru
+        $pengiriman = Order::with('user')
+            ->where('id_daerah', $id_daerah)
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         return view('dashboard.data.detail', compact('daerah', 'pengiriman'));
     }
