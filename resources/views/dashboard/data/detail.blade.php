@@ -90,7 +90,7 @@
                                 @forelse($pengiriman ?? [] as $i => $order)
                                     <tr>
                                         <td style="text-align: center">{{ $i + 1 }}</td>
-                                        <td class="font-mono text-blue-600" style="text-align: center">
+                                        <td class="font-mono text-[#4A90E2]" style="text-align: center">
                                             {{ $order->AWB ?? '-' }}</td>
                                         <td style="text-align: center">{{ $order->user->nama ?? '-' }}</td>
                                         <!-- Nama Kurir -->
@@ -112,7 +112,7 @@
                                             <div class="flex justify-center gap-2">
                                                 @if (!empty($order->AWB))
                                                     <a href="{{ route('dashboard.data-pengiriman.show', $order->AWB) }}"
-                                                        class="inline-flex items-center justify-center rounded bg-blue-400 hover:bg-blue-400 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
+                                                        class="inline-flex items-center justify-center rounded bg-[#4A90E2] hover:bg-[#2c66a7] p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
                                                         title="Lihat Detail">
                                                         <i class="bx bx-show text-white text-lg"></i>
                                                     </a>
@@ -141,8 +141,13 @@
                             class="fixed inset-0 z-10 hidden items-center justify-center bg-black bg-opacity-50 flex">
                             <div class="w-full max-w-md rounded-lg bg-white p-6 text-center">
                                 <div class="mb-4 flex justify-center">
-                                    <img src="{{ asset('assets/images/dashboard/svg-icon/warning.svg') }}"
-                                        alt="Warning Icon" class="h-12 w-12" />
+                                    <div
+                                        class="w-16 h-16 rounded-full bg-blue-50 border-2 border-blue-200 flex items-center justify-center">
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-gradient-to-br from-[#4A90E2] to-[#357ABD] flex items-center justify-center shadow-lg">
+                                            <i class="bx bx-trash text-white text-2xl"></i>
+                                        </div>
+                                    </div>
                                 </div>
                                 <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900" id="modal-title">Konfirmasi
                                     Hapus</h3>
@@ -153,10 +158,10 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="rounded-lg bg-[#879FFF] w-full px-6 py-2 text-white text-center hover:bg-[#6B7EF7] focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2 transition-colors">Hapus</button>
+                                            class="rounded-lg bg-[#4A90E2] w-full px-6 py-2 text-white text-center hover:bg-[#397ac4] focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2 transition-colors">Hapus</button>
                                     </form>
                                     <button type="button"
-                                        class="rounded-lg border border-[#879FFF] w-1/2 px-6 py-2 text-[#879FFF] hover:bg-[#879FFF] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#879FFF] focus:ring-offset-2 transition-colors"
+                                        class="rounded-lg border border-[#4A90E2] w-1/2 px-6 py-2 text-[#4A90E2] focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2 transition-colors"
                                         onclick="closeDeleteModal()">Batal</button>
                                 </div>
                             </div>
