@@ -29,14 +29,11 @@ class DataPengiriman extends Controller
     // show detail pengiriman
     public function show(string $AWB)
     {
-        $order = Order::with('user')->where('AWB', $AWB)->firstOrFail();
-
-        // Ambil fotos dan tambahkan property url (tetap object)
+        $order = Order::with(['user'])->where('AWB', $AWB)->firstOrFail();
         $fotos = OrderFoto::where('AWB', $AWB)->get();
         foreach ($fotos as $foto) {
             $foto->url = asset('storage/' . $foto->path_foto);
         }
-
         return view('dashboard.data.show', compact('order', 'fotos'));
     }
 }
