@@ -191,8 +191,8 @@
         let deleteModal = document.getElementById('deleteModal');
         let deleteForm = document.getElementById('deleteForm');
 
-        function openDeleteModal(classId) {
-            deleteForm.action = ``;
+        function openDeleteModal(picId) {
+            deleteForm.action = `/dashboard/data-pic/${picId}`;
             deleteModal.classList.remove('hidden');
         }
 

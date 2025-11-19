@@ -115,7 +115,7 @@
                                             </div>
                                         </td>
                                         <td style="text-align: left">
-                                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $kurir->no_hp) }}"
+                                            <a href="https://wa.me/{{ preg_replace('/^08/', '628', preg_replace('/[^0-9]/', '', $kurir->no_hp)) }} "
                                                 target="_blank"
                                                 class="text-[#25D366] hover:underline font-semibold flex items-center gap-1"
                                                 title="Chat WhatsApp">
