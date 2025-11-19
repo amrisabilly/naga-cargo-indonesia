@@ -313,7 +313,7 @@
                             <div class="info-row">
                                 <span class="info-label">Tanggal Kirim</span>
                                 <span class="info-value">
-                                    {{ $order->tanggal ? \Carbon\Carbon::parse($order->tanggal)->format('d-m-Y H:i') : 'Data masih kosong' }}
+                                    {{ $order->tanggal ? \Carbon\Carbon::parse($order->tanggal)->format('d-m-Y') : 'Data masih kosong' }}
                                 </span>
                             </div>
                         </div>
@@ -396,11 +396,6 @@
                                         @endif
                                     </div>
                                 @endforeach
-                            @else
-                                <div class="thumbnail active flex items-center justify-center bg-gray-100 text-gray-400"
-                                    style="aspect-ratio:1;">
-                                    <span class="text-xs">Belum ada upload bukti foto</span>
-                                </div>
                             @endif
                         </div>
                     </div>
@@ -409,7 +404,13 @@
                     <div class="mt-4 p-4 bg-gray-50 rounded-lg">
                         <div class="flex items-center gap-2 text-sm text-gray-600">
                             <i class="bx bx-info-circle text-[#879FFF]"></i>
-                            <span id="photoDescription">Foto paket sebelum dikirim - Kondisi baik dan siap dikirim</span>
+                            <span id="photoDescription">
+                                @if ($fotos->isNotEmpty())
+                                    {{ $fotos->first()->keterangan ?? 'Foto paket sebelum dikirim - Kondisi baik dan siap dikirim' }}
+                                @else
+                                    Belum ada upload bukti foto
+                                @endif
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -455,11 +456,17 @@
         let currentImageIndex = 0;
 
         function changeMainImage(index, thumbnail) {
+            if (!images.length) return;
+
             currentImageIndex = index;
             document.getElementById('mainImage').src = images[index]?.url ||
-                'https://via.placeholder.com/600x400?text=No+Image';
+                'https://via.placeholder.com/600x400?text=Belum+Ada+Foto';
             document.getElementById('imageCounter').textContent = `${index + 1} / ${images.length}`;
-            document.getElementById('photoDescription').textContent = images[index]?.description || '';
+
+            // Update photo description
+            const description = images[index]?.description || 'Tidak ada keterangan';
+            document.getElementById('photoDescription').textContent = description;
+
             document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
             if (thumbnail) thumbnail.classList.add('active');
         }
