@@ -69,7 +69,7 @@
                                         class="w-full pl-11 pr-11 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:border-transparent transition-all text-sm text-gray-900 placeholder-gray-400"
                                         placeholder="Masukkan password Anda">
                                     <button type="button" id="togglePassword"
-                                        class="absolute inset-y-0 right-0 pr-4 flex items-center" aria-label="Tampilkan atau sembunyikan kata sandi">
+                                        class="absolute inset-y-0 right-0 pr-4 flex items-center">
                                         <i class="bx bx-hide text-lg text-gray-400 hover:text-[#4A90E2] transition-colors"
                                             id="eyeIcon"></i>
                                     </button>
